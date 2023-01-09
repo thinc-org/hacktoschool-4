@@ -1,6 +1,8 @@
 // import modules
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const routes = require('./routes');
 require('dotenv').config();
@@ -18,6 +20,8 @@ mongoose
   .catch((err) => console.log('DB CONNECTION ERROR', err));
 
 // middleware
+app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(cors({ origin: true, credentials: true }));
 
 // routes
