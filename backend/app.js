@@ -21,7 +21,7 @@ mongoose
 app.use(cors({ origin: true, credentials: true }));
 
 // routes
-app.use('/', routes);
+app.use('/api', routes);
 
 // port
 const port = process.env.PORT || 8080;
