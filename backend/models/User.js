@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const Joi = require('Joi');
 const passwordComplexity = require('joi-password-complexity');
+const { ROLE_ENUM } = require('../util/Role');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -17,7 +18,7 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     required: true,
-    enum: ['Student', 'Instructor', 'Admin'],
+    enum: ROLE_ENUM,
   },
   courses: {
     type: [mongoose.SchemaTypes.ObjectId],
