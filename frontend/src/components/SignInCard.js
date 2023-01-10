@@ -6,9 +6,9 @@ const SignInCard = () => {
             <div>
                 <form>
                     <label htmlFor="username">username:</label>
-                    <input type="text" id="username" name="username"></input>
+                    <input type="text" id="username" name="username" required></input>
                     <label htmlFor="password">password:</label>
-                    <input type="text" id="password" name="password"></input>
+                    <input type="password" id="password" name="password" required></input>
                     <input type="submit" value="Submit"></input>
                 </form>
             </div>
