@@ -1,5 +1,6 @@
 const { User, validate } = require('../models/User');
 const bcrypt = require('bcrypt');
+const Joi = require('Joi');
 
 const ctrl = {
   //GET /users
@@ -50,6 +51,43 @@ const ctrl = {
       return res.status(500).send({ message: 'Internal Server Error' });
     }
   },
+
+  //POST /auth/login
+  loginUser: async (req, res) => {
+    try {
+      const { error } = validate(req.body);
+
+      // Some validate error
+      if (error) {
+        return res.status(400).send({ message: error.details[0].message });
+      }
+      const user = await User.findOne({ name: req.body.name });
+      if (!user) {
+        return res.status(409).send({ message: 'Invalid Email or Password' });
+      }
+      const validPassword = await bcrypt.compare(
+        req.body.password,
+        user.password,
+      );
+      if (!validPassword) {
+        return res.status(401).send({ message: 'Invalid Email or Password' });
+      }
+      const token = user.generateAuthToken();
+      return res
+        .status(200)
+        .send({ data: token, message: 'Logged in successfully' });
+    } catch (e) {
+      return res.status(500).send({ message: 'Internal Server Error' });
+    }
+  },
+};
+
+const validate = (data) => {
+  const schema = Joi.object({
+    name: Joi.string().required().label('Name'),
+    password: Joi.string().required().label('Password'),
+  });
+  return schema.validate(data);
 };
 
 module.exports = ctrl;
