@@ -1,4 +1,4 @@
-const { User, validate } = require('../models/User');
+const { User, validateRegister, validateLogin } = require('../models/User');
 const bcrypt = require('bcrypt');
 const Joi = require('Joi');
 
@@ -33,8 +33,7 @@ const ctrl = {
   //POST /users/register
   registerUser: async (req, res) => {
     try {
-      const { error } = validate(req.body);
-
+      const { error } = validateRegister(req.body);
       // Some Validate Error
       if (error) {
         return res.status(400).send({ message: error.details[0].message });
@@ -45,6 +44,7 @@ const ctrl = {
       }
       const salt = await bcrypt.genSalt(Number(process.env.SALT));
       const hashPassword = await bcrypt.hash(req.body.password, salt);
+      console.log({ ...req.body, password: hashPassword });
       await new User({ ...req.body, password: hashPassword }).save();
       return res.status(201).send({ message: 'User created successfully' });
     } catch (e) {
@@ -55,7 +55,7 @@ const ctrl = {
   //POST /auth/login
   loginUser: async (req, res) => {
     try {
-      const { error } = validate(req.body);
+      const { error } = validateLogin(req.body);
 
       // Some validate error
       if (error) {
@@ -80,14 +80,6 @@ const ctrl = {
       return res.status(500).send({ message: 'Internal Server Error' });
     }
   },
-};
-
-const validate = (data) => {
-  const schema = Joi.object({
-    name: Joi.string().required().label('Name'),
-    password: Joi.string().required().label('Password'),
-  });
-  return schema.validate(data);
 };
 
 module.exports = ctrl;

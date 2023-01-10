@@ -42,12 +42,22 @@ userSchema.methods.generateAuthToken = function () {
 
 const User = mongoose.model('User', userSchema);
 
-const validate = (data) => {
+const validateRegister = (data) => {
   const schema = Joi.object({
     name: Joi.string().required().label('Name'),
-    password: passwordComplexity().required().label('Password'),
+    password: Joi.string().required().label('Password'),
+    role: Joi.string().required().label('Role'),
+    // password: passwordComplexity().required().label('Password'),
   });
   return schema.validate(data);
 };
 
-module.exports = { User, validate };
+const validateLogin = (data) => {
+  const schema = Joi.object({
+    name: Joi.string().required().label('Name'),
+    password: Joi.string().required().label('Password'),
+  });
+  return schema.validate(data);
+};
+
+module.exports = { User, validateRegister, validateLogin };
