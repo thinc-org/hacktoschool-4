@@ -6,6 +6,6 @@ routes.route('/').get(ctrl.getUsers);
 
 routes.route('/create').post(ctrl.createUser);
 
-routes.route('/register').post(ctrl.loginUser);
+routes.route('/register').post(ctrl.registerUser);
 
 module.exports = routes;
