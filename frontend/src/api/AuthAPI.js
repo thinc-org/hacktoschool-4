@@ -9,3 +9,8 @@ export const loginUser = async (data) => {
   localStorage.setItem('role', res.role);
   console.log(res.message);
 };
+
+export const logoutUser = async (data) => {
+  localStorage.removeItem('jwt');
+  localStorage.removeItem('role');
+};
