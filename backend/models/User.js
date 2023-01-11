@@ -49,7 +49,7 @@ const User = mongoose.model('User', userSchema);
 
 const validateRegister = (data) => {
   const schema = Joi.object({
-    username: Joi.string().required().label('Name'),
+    username: Joi.string().required().label('Username'),
     password: Joi.string().required().label('Password'),
     role: Joi.string().required().label('Role'),
     // password: passwordComplexity().required().label('Password'),
@@ -59,7 +59,7 @@ const validateRegister = (data) => {
 
 const validateLogin = (data) => {
   const schema = Joi.object({
-    username: Joi.string().required().label('Name'),
+    username: Joi.string().required().label('Username'),
     password: Joi.string().required().label('Password'),
   });
   return schema.validate(data);
