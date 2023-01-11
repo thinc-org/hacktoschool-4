@@ -7,7 +7,7 @@ const ctrl = {
   getUsers: async (req, res) => {
     try {
       const users = await User.find();
-      res.json(users);
+      return res.json(users);
     } catch (e) {
       return res.status(400).json({
         error: 'No users found',
@@ -80,6 +80,20 @@ const ctrl = {
       return res.status(500).send({ message: 'Internal Server Error' });
     }
   },
+  
+  //GET /users/:id
+  getUserByID: async (req, res) => {
+    try{
+      const user = await User.findById(req.params.id);
+      return res.json(user);
+    }catch(e){
+      return res.status(400).json({
+          error: 'No user found',
+      });
+    }
+
+  },
+
 };
 
 module.exports = ctrl;
