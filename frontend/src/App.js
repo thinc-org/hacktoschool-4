@@ -4,6 +4,7 @@ import SignInPage from './pages/SignInPage';
 import Home from './pages'
 import CoursesPage from './pages/CoursesPage';
 import Footer from './components/Footer';
+import SignUpPage from './pages/SignUpPage';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path='/' exact element={<Home/>} />
         <Route path='/courses' exact element={<CoursesPage/>} />
         <Route path='/sign-in' element={<SignInPage/>} />
+        <Route path='/sign-up' element={<SignUpPage/>} />
       </Routes>
       <Footer></Footer>
     </Router>
