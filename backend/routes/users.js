@@ -99,9 +99,11 @@ routes.route('/username/:username').get(ctrl.getUserByUsername);
  *       '201':
  *         description: User created successfully
  *       '400':
- *         description: validate error, please check if body correctly.
+ *         description: validate error, please check whether the body is correct
  *       '409':
- *         description: validate error, please check if body correctly.
+ *         description: Username is already in used
+ *       '500':
+ *         description: Internal Server Error
  */
 routes.route('/register').post(ctrl.registerUser);
 
