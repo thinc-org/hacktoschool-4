@@ -7,7 +7,7 @@ const ctrl = {
   getUsers: async (req, res) => {
     try {
       const users = await User.find();
-      res.json(users);
+      return res.status(200).json(users);
     } catch (e) {
       return res.status(400).json({
         error: 'No users found',
@@ -21,7 +21,7 @@ const ctrl = {
     try {
       const newUser = await user.save();
       console.log(newUser);
-      res.json({ newUser });
+      return res.status(201).json({ newUser });
     } catch (e) {
       console.log(e);
       return res.status(400).json({
@@ -38,7 +38,7 @@ const ctrl = {
       if (error) {
         return res.status(400).send({ message: error.details[0].message });
       }
-      const user = await User.findOne({ name: req.body.name });
+      const user = await User.findOne({ username: req.body.username });
       if (user) {
         return res.status(409).send({ message: 'Username is already in used' });
       }
@@ -61,7 +61,7 @@ const ctrl = {
       if (error) {
         return res.status(400).send({ message: error.details[0].message });
       }
-      const user = await User.findOne({ name: req.body.name });
+      const user = await User.findOne({ username: req.body.username });
       if (!user) {
         return res.status(409).send({ message: 'Invalid Email or Password' });
       }
@@ -78,6 +78,30 @@ const ctrl = {
         .send({ accessToken: token, message: 'Logged in successfully' });
     } catch (e) {
       return res.status(500).send({ message: 'Internal Server Error' });
+    }
+  },
+
+  //GET /users/id/:id
+  getUserByID: async (req, res) => {
+    try {
+      const user = await User.findById(req.params.id);
+      return res.status(200).json(user);
+    } catch (e) {
+      return res.status(400).json({
+        error: 'No user found',
+      });
+    }
+  },
+
+  //GET /users/username/:username
+  getUserByUsername: async (req, res) => {
+    try {
+      const user = await User.findOne({ username: req.params.username });
+      return res.status(200).json(user);
+    } catch (e) {
+      return res.status(400).json({
+        error: 'No user found',
+      });
     }
   },
 };
