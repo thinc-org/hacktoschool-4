@@ -93,10 +93,10 @@ const ctrl = {
     }
   },
 
-  //GET /users/name/:name
-  getUserByName: async (req, res) => {
+  //GET /users/userName/:userName
+  getUserByUserName: async (req, res) => {
     try {
-      const user = await User.findOne({ name: req.params.name });
+      const user = await User.findOne({ userName: req.params.userName });
       return res.status(200).json(user);
     } catch (e) {
       return res.status(400).json({
