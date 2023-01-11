@@ -8,7 +8,7 @@ const Navbar = () => {
                 <div>
                     <h1>GlobalTalk</h1>
                     <Link to='/'>home</Link>
-                    <Link>course</Link>
+                    <Link to='/courses'>course</Link>
                 </div>
                 <div>
                     <Link to='/sign-in'>sign in</Link>

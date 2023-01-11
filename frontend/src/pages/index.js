@@ -1,9 +1,11 @@
 import React from 'react';
+import ContentCard from '../components/ContentCard';
 
 const Home = () => {
   return (
     <div>
-      <h1>Home</h1>
+      <ContentCard></ContentCard>
+      <ContentCard></ContentCard>
     </div>
   );
 };
