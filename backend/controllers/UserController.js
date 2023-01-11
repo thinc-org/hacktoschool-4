@@ -94,7 +94,7 @@ const ctrl = {
   },
 
   //GET /users/username/:username
-  getUserByUserName: async (req, res) => {
+  getUserByUsername: async (req, res) => {
     try {
       const user = await User.findOne({ username: req.params.username });
       return res.status(200).json(user);
