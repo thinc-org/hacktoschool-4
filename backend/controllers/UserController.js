@@ -38,7 +38,7 @@ const ctrl = {
       if (error) {
         return res.status(400).send({ message: error.details[0].message });
       }
-      const user = await User.findOne({ userName: req.body.userName });
+      const user = await User.findOne({ username: req.body.username });
       if (user) {
         return res.status(409).send({ message: 'Username is already in used' });
       }
@@ -61,7 +61,7 @@ const ctrl = {
       if (error) {
         return res.status(400).send({ message: error.details[0].message });
       }
-      const user = await User.findOne({ userName: req.body.userName });
+      const user = await User.findOne({ username: req.body.username });
       if (!user) {
         return res.status(409).send({ message: 'Invalid Email or Password' });
       }
@@ -93,10 +93,10 @@ const ctrl = {
     }
   },
 
-  //GET /users/userName/:userName
+  //GET /users/username/:username
   getUserByUserName: async (req, res) => {
     try {
-      const user = await User.findOne({ userName: req.params.userName });
+      const user = await User.findOne({ username: req.params.username });
       return res.status(200).json(user);
     } catch (e) {
       return res.status(400).json({
