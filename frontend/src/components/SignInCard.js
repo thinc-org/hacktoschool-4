@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import { loginUser } from '../api/AuthAPI';
 
 const SignInCard = () => {
   const [data, setData] = useState({ username: '', password: '' });
@@ -13,12 +14,8 @@ const SignInCard = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = 'http://localhost:8080/api/auth/login';
-      const { data: res } = await axios.post(url, data);
-      localStorage.setItem('jwt', res.accessToken);
-      localStorage.setItem('role', res.role);
-      //   window.location = '/';
-      console.log(res.message);
+      await loginUser(data);
+      window.location = '/';
     } catch (error) {
       if (
         error.response &&
