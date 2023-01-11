@@ -81,7 +81,7 @@ const ctrl = {
     }
   },
   
-  //GET /users/:id
+  //GET /users/id/:id
   getUserByID: async (req, res) => {
     try{
       const user = await User.findById(req.params.id);
@@ -92,6 +92,18 @@ const ctrl = {
       });
     }
 
+  },
+
+  //GET /users/name/:name
+  getUserByName: async (req, res) => {
+    try{
+      const user = await User.findOne({ name: req.params.name});
+      return res.json(user);
+    }catch(e){
+      return res.status(400).json({
+          error: 'No user found',
+      });
+    };
   },
 
 };

@@ -16,6 +16,8 @@ routes
   .route('/testAuthenToken')
   .get(authenticateToken, isStudent, ctrl.getUsers);
 
-routes.route('/:id').get(ctrl.getUserByID);
+routes.route('/id/:id').get(ctrl.getUserByID);
+
+routes.route('/name/:name').get(ctrl.getUserByName);
 
 module.exports = routes;
