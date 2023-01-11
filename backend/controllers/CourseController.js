@@ -4,7 +4,7 @@ const ctrl = {
   //GET /courses
   getCourses: (req, res) => {
     Course.find().then((courses) => {
-      return res.send(courses);
+      return res.status(200).send(courses);
     });
   },
 };

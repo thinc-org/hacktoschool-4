@@ -7,7 +7,7 @@ const ctrl = {
   getUsers: async (req, res) => {
     try {
       const users = await User.find();
-      return res.json(users);
+      return res.status(200).json(users);
     } catch (e) {
       return res.status(400).json({
         error: 'No users found',
@@ -21,7 +21,7 @@ const ctrl = {
     try {
       const newUser = await user.save();
       console.log(newUser);
-      res.json({ newUser });
+      return res.status(201).json({ newUser });
     } catch (e) {
       console.log(e);
       return res.status(400).json({
@@ -80,32 +80,30 @@ const ctrl = {
       return res.status(500).send({ message: 'Internal Server Error' });
     }
   },
-  
+
   //GET /users/id/:id
   getUserByID: async (req, res) => {
-    try{
+    try {
       const user = await User.findById(req.params.id);
       return res.json(user);
-    }catch(e){
+    } catch (e) {
       return res.status(400).json({
-          error: 'No user found',
+        error: 'No user found',
       });
     }
-
   },
 
   //GET /users/name/:name
   getUserByName: async (req, res) => {
-    try{
-      const user = await User.findOne({ name: req.params.name});
+    try {
+      const user = await User.findOne({ name: req.params.name });
       return res.json(user);
-    }catch(e){
+    } catch (e) {
       return res.status(400).json({
-          error: 'No user found',
+        error: 'No user found',
       });
-    };
+    }
   },
-
 };
 
 module.exports = ctrl;
