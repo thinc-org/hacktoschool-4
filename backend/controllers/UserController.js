@@ -38,7 +38,7 @@ const ctrl = {
       if (error) {
         return res.status(400).send({ message: error.details[0].message });
       }
-      const user = await User.findOne({ name: req.body.name });
+      const user = await User.findOne({ userName: req.body.userName });
       if (user) {
         return res.status(409).send({ message: 'Username is already in used' });
       }
@@ -61,7 +61,7 @@ const ctrl = {
       if (error) {
         return res.status(400).send({ message: error.details[0].message });
       }
-      const user = await User.findOne({ name: req.body.name });
+      const user = await User.findOne({ userName: req.body.userName });
       if (!user) {
         return res.status(409).send({ message: 'Invalid Email or Password' });
       }
