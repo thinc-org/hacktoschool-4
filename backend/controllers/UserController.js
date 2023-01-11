@@ -85,7 +85,7 @@ const ctrl = {
   getUserByID: async (req, res) => {
     try {
       const user = await User.findById(req.params.id);
-      return res.json(user);
+      return res.status(200).json(user);
     } catch (e) {
       return res.status(400).json({
         error: 'No user found',
@@ -97,7 +97,7 @@ const ctrl = {
   getUserByName: async (req, res) => {
     try {
       const user = await User.findOne({ name: req.params.name });
-      return res.json(user);
+      return res.status(200).json(user);
     } catch (e) {
       return res.status(400).json({
         error: 'No user found',
