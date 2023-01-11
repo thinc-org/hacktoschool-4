@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const SignUpCard = () => {
     const [data, setData] = useState({
-		name: "",
+		username: "",
 		password: "",
         role: "",
 	});
@@ -38,7 +38,7 @@ const SignUpCard = () => {
             <div>
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="username">username:</label>
-                    <input type="text" id="username" name="name" onChange={handleChange} value={data.username} required></input>
+                    <input type="text" id="username" name="username" onChange={handleChange} value={data.username} required></input>
                     <label htmlFor="password">password:</label>
                     <input type="password" id="password" name="password" onChange={handleChange} value={data.password} required></input>
 
