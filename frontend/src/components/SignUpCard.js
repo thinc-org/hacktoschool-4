@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import { registerUser } from '../api/UserAPI';
 
 const SignUpCard = () => {
   const [data, setData] = useState({
@@ -19,10 +19,8 @@ const SignUpCard = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = 'http://localhost:8080/api/users/register';
-      const { data: res } = await axios.post(url, data);
+      await registerUser(data); // I moved the function to api folder
       navigate('/sign-in');
-      console.log(res.message);
     } catch (error) {
       if (
         error.response &&
