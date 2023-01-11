@@ -1,8 +1,9 @@
 import React from 'react';
 import CourseCard from '../components/CourseCard';
+import CardStyle from "../components/CourseCard.module.css";
 
 const course1 = {
-
+    "title": "cc1",
     "description": "fah",
     "instructor": " build",
     "students": ["pun", "book"],
@@ -12,7 +13,7 @@ const course1 = {
 }
 
 const course2 = {
-
+    "title": "cc2",
     "description": "fahfi",
     "instructor": " build",
     "students": ["tuatua", "book"],
@@ -21,7 +22,7 @@ const course2 = {
 
 }
 const course3 = {
-
+    "title": "cc3",
     "description": "niniini",
     "instructor": " builddddd",
     "students": ["tuatua", "book"],
@@ -35,14 +36,30 @@ const CoursesPage = () => {
     return (
         <>
             <div className="enrolled-courses-wrapper">
-                <div className="enrolled-courses-header">
+                <div className="courses-header">
                     <h1>enrolled</h1>
                 </div>
-                <div className="enrolled-courses">
-                    <div className="course" style={{ width: "257.5px", marginRight: "30px" }}>
-                        {courses.map((course) => (
-                            <CourseCard course={course} />
-                        ))}
+                <div className="courses ">
+                    <div className={CardStyle.wrapper}>
+                        <div className="course" style={{ width: "30%", marginRight: "30px" }}>
+                            {courses.map((course) => (
+                                <CourseCard course={course} />
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className='to explore'>
+                <div className='courses-header'>
+                    <h1>to explore</h1>
+                </div>
+                <div className="courses">
+                    <div className={CardStyle.wrapper}>
+                        <div className="course" style={{ width: "30%", marginRight: "30px" }}>
+                            {courses.map((course) => (
+                                <CourseCard course={course} />
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
