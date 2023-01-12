@@ -51,6 +51,36 @@ const ctrl = {
       });
     }
   },
+
+  //DELETE /courses/delete/id/:id
+  deleteCourseByID: async (req, res) => {
+    try {
+      const course = await Course.findByIdAndDelete(req.params.id);
+      return res.status(200).json({
+        id: course._id,
+        message: 'Delete course successfully',
+      });
+    } catch (e) {
+      return res.status(400).json({
+        error: 'No course to delete',
+      });
+    }
+  },
+
+  //DELETE /courses/delete/title/:title
+  deleteCourseByTitle: async (req, res) => {
+    try {
+      const course = await Course.findOneAndDelete({ title: req.params.title });
+      return res.status(200).json({
+        id: course._id,
+        message: 'Delete course successfully',
+      });
+    } catch (e) {
+      return res.status(400).json({
+        error: 'No course to delete',
+      });
+    }
+  },
 };
 
 module.exports = ctrl;

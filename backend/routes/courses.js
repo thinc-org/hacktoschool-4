@@ -67,4 +67,8 @@ routes.route('/title/:title').get(ctrl.getCourseByTitle);
 
 routes.route('/create').post(ctrl.createCourse);
 
+routes.route('/delete/id/:id').delete(ctrl.deleteCourseByID);
+
+routes.route('/delete/title/:title').delete(ctrl.deleteCourseByTitle);
+
 module.exports = routes;
