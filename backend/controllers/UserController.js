@@ -73,13 +73,11 @@ const ctrl = {
         return res.status(401).send({ message: 'Invalid Email or Password' });
       }
       const token = user.generateAuthToken();
-      return res
-        .status(200)
-        .send({
-          role: user.role,
-          accessToken: token,
-          message: 'Logged in successfully',
-        });
+      return res.status(200).send({
+        role: user.role,
+        accessToken: token,
+        message: 'Logged in successfully',
+      });
     } catch (e) {
       return res.status(500).send({ message: 'Internal Server Error' });
     }
@@ -109,7 +107,7 @@ const ctrl = {
     }
   },
 
-  //DELETE /users/delete-id/:id
+  //DELETE /users/delete/id/:id
   deleteUserByID: async (req, res) => {
     try {
       const user = await User.findByIdAndDelete(req.params.id);
@@ -123,7 +121,7 @@ const ctrl = {
     }
   },
 
-  //DELETE /users/delete-username/:username
+  //DELETE /users/delete/username/:username
   deleteUserByUsername: async (req, res) => {
     try {
       const user = await User.findOneAndDelete({

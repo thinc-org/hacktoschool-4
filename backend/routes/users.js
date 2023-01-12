@@ -51,7 +51,7 @@ routes.route('/id/:id').get(ctrl.getUserByID);
  *  get:
  *    tags:
  *      - users
- *    summary: Find user by name
+ *    summary: Find user by username
  *    description: Returns a single user
  *    parameters:
  *      - name: username
@@ -107,14 +107,56 @@ routes.route('/username/:username').get(ctrl.getUserByUsername);
  */
 routes.route('/register').post(ctrl.registerUser);
 
+/**
+ * @swagger
+ * /users/delete/id/{id}:
+ *  delete:
+ *    tags:
+ *      - users
+ *    summary: Delete user by ID
+ *    description: Delete a single user
+ *    parameters:
+ *      - name: _id
+ *        in: path
+ *        description: mongodb ID of user to delete
+ *        required: true
+ *        schema:
+ *          type: string
+ *    responses:
+ *      '200':
+ *        description: successful operation
+ *      '400':
+ *        description: Invalid ID supplied
+ */
+routes.route('/delete/id/:id').delete(ctrl.deleteUserByID);
+
+/**
+ * @swagger
+ * /users/delete/username/{username}:
+ *  delete:
+ *    tags:
+ *      - users
+ *    summary: Delete user by username
+ *    description: Delete a single user
+ *    parameters:
+ *      - name: username
+ *        in: path
+ *        description: username of user to delete
+ *        required: true
+ *        schema:
+ *          type: string
+ *    responses:
+ *      '200':
+ *        description: successful operation
+ *      '400':
+ *        description: Invalid username supplied
+ */
+routes.route('/delete/username/:username').delete(ctrl.deleteUserByUsername);
+
 routes
   .route('/testAuthenToken')
   .get(authenticateToken, isStudent, ctrl.getUsers);
 
 routes.route('/create').post(ctrl.createUser);
-
-routes.route('/delete-id/:id').delete(ctrl.deleteUserByID);
-
-routes.route('/delete-username/:username').delete(ctrl.deleteUserByUsername);
 
 module.exports = routes;
