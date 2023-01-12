@@ -75,7 +75,11 @@ const ctrl = {
       const token = user.generateAuthToken();
       return res
         .status(200)
-        .send({ accessToken: token, message: 'Logged in successfully' });
+        .send({
+          role: user.role,
+          accessToken: token,
+          message: 'Logged in successfully',
+        });
     } catch (e) {
       return res.status(500).send({ message: 'Internal Server Error' });
     }

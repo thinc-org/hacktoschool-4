@@ -6,7 +6,7 @@ const courses = require('./courses');
 const auth = require('./auth');
 
 app.use('/users', users);
-app.use('/course', courses);
+app.use('/courses', courses);
 app.use('/auth', auth);
 
 module.exports = app;

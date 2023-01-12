@@ -25,9 +25,15 @@ const ctrl = require('../controllers/UserController');
  *           type: string
  *     responses:
  *       '200':
- *         description: successful operation
+ *         description: Logged in successfully
  *       '400':
- *         description: Invalid username supplied
+ *         description: validate error, please check whether the body correct
+ *       '401':
+ *         description: Invalid Email or Password
+ *       '409':
+ *         description: Invalid Email or Password
+ *       '500':
+ *         description: Internal Server Error
  */
 routes.route('/login').post(ctrl.loginUser);
 
