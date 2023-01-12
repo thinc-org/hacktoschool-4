@@ -140,15 +140,89 @@ routes.route('/delete/title/:title').delete(ctrl.deleteCourseByTitle);
  */
 routes.route('/arrayOfID').get(ctrl.getCourseByArrayOfID);
 
+/**
+ * @swagger
+ * /courses/username/{username}:
+ *  get:
+ *    tags:
+ *      - courses
+ *    summary: Find all (enrolled,teached) courses by username
+ *    description: Find all enrolled courses for student username and teached courses by instructor username
+ *    parameters:
+ *      - name: username
+ *        in: path
+ *        description: just username :P
+ *        required: true
+ *        schema:
+ *          type: array of string
+ *    responses:
+ *      '200':
+ *        description: successful operation
+ *      '400':
+ *        description: Invalid Username
+ *      '500':
+ *        description: Internal Server Error
+ */
+routes.route('/username/:username').get(ctrl.getCourseByUsername);
+
+/**
+ * @swagger
+ * /courses/addCourse:
+ *   post:
+ *     tags:
+ *       - courses
+ *     summary: Add a new course to database
+ *     description: Instructor created a new course to database
+ *     parameters:
+ *       - name: title
+ *         in: body
+ *         description: title of a courses (Can't have duplicate title in DB)
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '201':
+ *         description: Course created successfully
+ *       '400':
+ *         description: No course title
+ *       '409':
+ *         description: Course title is already taken
+ *       '500':
+ *         description: Internal Server Error
+ */
 routes
   .route('/addCourse')
   .post(authenticateToken, isInstructor, ctrl.addCourse);
 
+/**
+ * @swagger
+ * /joinCourse/{title}:
+ *   post:
+ *     tags:
+ *       - courses
+ *     summary: Join course
+ *     description: Student enrolled to a course by course title
+ *     parameters:
+ *       - name: title
+ *         in: path
+ *         description: title of a courses want to join
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Succesfully joined
+ *       '400':
+ *         description: Course title not exist
+ *       '409':
+ *         description: User already join course
+ *       '500':
+ *         description: Internal Server Error
+ */
 routes
   .route('/joinCourse/:title')
   .post(authenticateToken, isStudent, ctrl.joinCourse);
 
 routes.route('/create').post(ctrl.createCourse);
-routes.route('/username/:username').get(ctrl.getCourseByUsername);
 
 module.exports = routes;
