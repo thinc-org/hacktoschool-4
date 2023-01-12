@@ -1,0 +1,47 @@
+
+GET http://localhost:8080/api/courses/
+
+###
+
+POST http://localhost:8080/api/courses/create/
+content-type: application/json
+{
+    "title": "DatadDDD",
+    "instructor": "63bedddc1d2696b127965b47"
+}
+
+###
+GET http://localhost:8080/api/users/
+
+###
+GET http://localhost:8080/api/courses/arrayOfID
+Content-Type: application/json
+
+{
+    "id": ["63bf9b0373ee4c3b2bfb1443", "63bf9b2773ee4c3b2bfb1447"]
+}
+
+###
+POST http://localhost:8080/api/users/create/
+Content-Type: application/json
+
+{
+    "username": "HEllo2222",
+    "password": "63bedddc1d2696b127965b47",
+    "role": "Student",
+    "courses": [ "63bf9b0373ee4c3b2bfb1443"]
+}
+
+###
+POST http://localhost:8080/api/courses/create/
+Content-Type: application/json
+
+{
+    "title": "DaiMaiMaiDai",
+    "instructor": "63bedddc1d2696b127965b47",
+    "students": ["63bee63849324ddfff8384d3", "63bee86e49324ddfff8384d7"]
+}
+
+###
+GET http://localhost:8080/api/courses/username/DatadDDD
+

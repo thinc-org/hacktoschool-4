@@ -1,4 +1,5 @@
 const { User, validateRegister, validateLogin } = require('../models/User');
+const Course = require('../models/Course');
 const bcrypt = require('bcrypt');
 const Joi = require('Joi');
 
@@ -20,10 +21,10 @@ const ctrl = {
     const user = new User(req.body);
     try {
       const newUser = await user.save();
-      console.log(newUser);
+      // console.log(newUser);
       return res.status(201).json({ newUser });
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       return res.status(400).json({
         error: 'Cant create new user',
       });
@@ -44,11 +45,12 @@ const ctrl = {
       }
       const salt = await bcrypt.genSalt(Number(process.env.SALT));
       const hashPassword = await bcrypt.hash(req.body.password, salt);
-      console.log({ ...req.body, password: hashPassword });
+      // console.log({ ...req.body, password: hashPassword });
       await new User({ ...req.body, password: hashPassword }).save();
       return res.status(201).send({ message: 'User created successfully' });
     } catch (e) {
-      return res.status(500).send({ message: 'Internal Server Error' });
+      // console.log(e);
+      return res.status(400).send({ message: 'User Validation failed' });
     }
   },
 
@@ -99,10 +101,11 @@ const ctrl = {
   getUserByUsername: async (req, res) => {
     try {
       const user = await User.findOne({ username: req.params.username });
+      if (!user) return res.status(400).json({ error: 'No user found' });
       return res.status(200).json(user);
     } catch (e) {
-      return res.status(400).json({
-        error: 'No user found',
+      return res.status(500).json({
+        error: 'Internal Server Error',
       });
     }
   },
@@ -133,6 +136,37 @@ const ctrl = {
     } catch (e) {
       return res.status(400).json({
         error: 'No user to delete',
+      });
+    }
+  },
+
+  // !NOT USED
+  //GET /users/courseID/:id
+  getStudentsByCourseID: async (req, res) => {
+    try {
+      const students = await User.find({
+        role: 'Student',
+        courses: req.params.id,
+      });
+      return res.status(200).json(students);
+    } catch (e) {
+      return res.status(400).json({
+        error: 'No student joined this course',
+      });
+    }
+  },
+
+  getStudentsByCourseTitle: async (req, res) => {
+    try {
+      const course = await Course.findOne({ title: req.params.title });
+      if (!course)
+        return res.status(400).json({ error: 'Invalid course title' });
+      const student = await User.find({ _id: { $in: course.students } });
+      // console.log(student);
+      return res.status(200).json(student.map((a) => a.username));
+    } catch (e) {
+      return res.status(500).json({
+        error: 'Internal Server Error',
       });
     }
   },

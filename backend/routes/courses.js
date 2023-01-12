@@ -1,7 +1,11 @@
 const express = require('express');
-
 const routes = express.Router();
 const ctrl = require('../controllers/CourseController');
+const {
+  authenticateToken,
+  isStudent,
+  isInstructor,
+} = require('../middlewares/AuthMiddleWare');
 
 /**
  * @swagger
@@ -61,11 +65,11 @@ routes.route('/id/:id').get(ctrl.getCourseByID);
  *      '200':
  *        description: successful operation
  *      '400':
- *        description: Invalid username supplied
+ *        description: Invalid title supplied
+ *      '500':
+ *        description: Internal Server Error
  */
 routes.route('/title/:title').get(ctrl.getCourseByTitle);
-
-routes.route('/create').post(ctrl.createCourse);
 
 /**
  * @swagger
@@ -109,10 +113,116 @@ routes.route('/delete/id/:id').delete(ctrl.deleteCourseByID);
  *      '200':
  *        description: successful operation
  *      '400':
- *        description: Invalid username supplied
+ *        description: Invalid title supplied
  */
 routes.route('/delete/title/:title').delete(ctrl.deleteCourseByTitle);
 
+/**
+ * @swagger
+ * /courses/arrayOfID:
+ *  get:
+ *    tags:
+ *      - courses
+ *    summary: Find all courses in array
+ *    description: Find all courses in array of course id
+ *    parameters:
+ *      - name: id
+ *        in: body
+ *        description: Array of course id ==> ["63c008c0fe6e2ac1f57a0c9e","63c003eab0bed2c19baba02f", "63c003f2b0bed2c19baba032"]
+ *        required: true
+ *        schema:
+ *          type: array of string
+ *    responses:
+ *      '200':
+ *        description: successful operation
+ *      '400':
+ *        description: Invalid Course ID
+ */
 routes.route('/arrayOfID').get(ctrl.getCourseByArrayOfID);
+
+/**
+ * @swagger
+ * /courses/username/{username}:
+ *  get:
+ *    tags:
+ *      - courses
+ *    summary: Find all (enrolled,teached) courses by username
+ *    description: Find all enrolled courses for student username and teached courses by instructor username
+ *    parameters:
+ *      - name: username
+ *        in: path
+ *        description: just username :P
+ *        required: true
+ *        schema:
+ *          type: array of string
+ *    responses:
+ *      '200':
+ *        description: successful operation
+ *      '400':
+ *        description: Invalid Username
+ *      '500':
+ *        description: Internal Server Error
+ */
+routes.route('/username/:username').get(ctrl.getCourseByUsername);
+
+/**
+ * @swagger
+ * /courses/addCourse:
+ *   post:
+ *     tags:
+ *       - courses
+ *     summary: Add a new course to database
+ *     description: Instructor created a new course to database
+ *     parameters:
+ *       - name: title
+ *         in: body
+ *         description: title of a courses (Can't have duplicate title in DB)
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '201':
+ *         description: Course created successfully
+ *       '400':
+ *         description: No course title
+ *       '409':
+ *         description: Course title is already taken
+ *       '500':
+ *         description: Internal Server Error
+ */
+routes
+  .route('/addCourse')
+  .post(authenticateToken, isInstructor, ctrl.addCourse);
+
+/**
+ * @swagger
+ * /joinCourse/{title}:
+ *   post:
+ *     tags:
+ *       - courses
+ *     summary: Join course
+ *     description: Student enrolled to a course by course title
+ *     parameters:
+ *       - name: title
+ *         in: path
+ *         description: title of a courses want to join
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Succesfully joined
+ *       '400':
+ *         description: Course title not exist
+ *       '409':
+ *         description: User already join course
+ *       '500':
+ *         description: Internal Server Error
+ */
+routes
+  .route('/joinCourse/:title')
+  .post(authenticateToken, isStudent, ctrl.joinCourse);
+
+routes.route('/create').post(ctrl.createCourse);
 
 module.exports = routes;

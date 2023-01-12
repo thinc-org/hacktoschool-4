@@ -6,7 +6,7 @@ export const COLORS = {
   cyandark: '#2B788B',
   cyanlight: '#C3DCE3',
   greylight: '#F6F5F4',
-  graymedium: '#E0E0E0',
-  grayicon: '#BABABA',
-  graydark: '#757575',
+  greymedium: '#E0E0E0',
+  greyicon: '#BABABA',
+  greydark: '#757575',
 };

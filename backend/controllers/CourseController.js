@@ -1,4 +1,6 @@
 const Course = require('../models/Course');
+const { User } = require('../models/User');
+const jwt_decode = require('jwt-decode');
 
 const ctrl = {
   //GET /courses
@@ -29,10 +31,11 @@ const ctrl = {
   getCourseByTitle: async (req, res) => {
     try {
       const course = await Course.findOne({ title: req.params.title });
+      if (!course) return res.status(400).json({ error: 'No course found' });
       return res.status(200).json(course);
     } catch (e) {
-      return res.status(400).json({
-        error: 'No user found',
+      return res.status(500).json({
+        error: 'Internal Server Error',
       });
     }
   },
@@ -89,7 +92,95 @@ const ctrl = {
       return res.status(200).json(courses);
     } catch (e) {
       return res.status(400).json({
-        error: 'No course found',
+        error: 'Invalid Course ID',
+      });
+    }
+  },
+
+  //POST /courses/addCourse
+  addCourse: async (req, res) => {
+    try {
+      const courseInfo = req.body;
+      if (!courseInfo.title) {
+        return res.status(400).json({
+          error: 'No course title',
+        });
+      }
+
+      // Check if already has course title in DB
+      const existedCourse = await Course.findOne({ title: courseInfo.title });
+      if (existedCourse) {
+        return res
+          .status(409)
+          .send({ message: 'Course title is already taken' });
+      }
+
+      const authHeader = req.headers['authorization'];
+      const token = authHeader && authHeader.split(' ')[1];
+      const decoded = jwt_decode(token);
+      console.log(courseInfo);
+      //? Is it danger add all courseinfo to database
+      const course = new Course({ ...courseInfo, instructor: decoded._id });
+      const newCourse = await course.save();
+      await User.updateOne(
+        { _id: decoded._id },
+        { $push: { courses: newCourse._id } },
+      );
+      return res.status(201).send({ message: 'Course succesfully added' });
+    } catch (e) {
+      return res.status(500).send({ message: 'Internal Server Error' });
+    }
+  },
+
+  //POST /courses/joinCourse/:title
+  joinCourse: async (req, res) => {
+    try {
+      const courseTitle = req.params.title;
+      if (!courseTitle) {
+        return res.status(400).json({
+          error: 'No course title',
+        });
+      }
+
+      // Check if course title exist in DB
+      const existedCourse = await Course.findOne({ title: courseTitle });
+      if (!existedCourse) {
+        return res.status(400).send({ message: 'Course title not exist' });
+      }
+      const courseID = existedCourse._id;
+
+      // Check if the user already join the course.
+      const authHeader = req.headers['authorization'];
+      const token = authHeader && authHeader.split(' ')[1];
+      const userID = jwt_decode(token)._id;
+      const joinedCourses = User.findById(userID).courses;
+      if (
+        (joinedCourses && joinedCourses.includes(courseID)) ||
+        existedCourse.students.includes(userID)
+      ) {
+        return res.status(409).send({ message: 'User already join course' });
+      }
+      await User.updateOne({ _id: userID }, { $push: { courses: courseID } });
+      await Course.updateOne(
+        { _id: courseID },
+        { $push: { students: userID } },
+      );
+      return res.status(200).send({ message: 'Succesfully joined' });
+    } catch (e) {
+      return res.status(500).send({ message: 'Internal Server Error' });
+    }
+  },
+
+  //GET /courses/username/:username
+  getCourseByUsername: async (req, res) => {
+    try {
+      const user = await User.findOne({ username: req.params.username });
+      if (!user) return res.status(400).json({ error: 'Invalid username' });
+      const courses = await Course.find({ _id: { $in: user.courses } });
+      return res.status(200).json(courses);
+    } catch (e) {
+      return res.status(500).json({
+        error: 'Internal Server Error ',
       });
     }
   },
