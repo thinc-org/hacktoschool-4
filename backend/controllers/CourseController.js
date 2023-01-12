@@ -97,7 +97,7 @@ const ctrl = {
     }
   },
 
-  //POST /courses/addCours
+  //POST /courses/addCourse
   addCourse: async (req, res) => {
     try {
       const courseInfo = req.body;
@@ -119,6 +119,7 @@ const ctrl = {
       const token = authHeader && authHeader.split(' ')[1];
       const decoded = jwt_decode(token);
       console.log(courseInfo);
+      //? Is it danger add all courseinfo to database
       const course = new Course({ ...courseInfo, instructor: decoded._id });
       const newCourse = await course.save();
       await User.updateOne(
@@ -164,7 +165,7 @@ const ctrl = {
         { _id: courseID },
         { $push: { students: userID } },
       );
-      return res.status(201).send({ message: 'Succesfully joined' });
+      return res.status(200).send({ message: 'Succesfully joined' });
     } catch (e) {
       return res.status(500).send({ message: 'Internal Server Error' });
     }
@@ -174,11 +175,12 @@ const ctrl = {
   getCourseByUsername: async (req, res) => {
     try {
       const user = await User.findOne({ username: req.params.username });
+      if (!user) return res.status(400).json({ error: 'Invalid username' });
       const courses = await Course.find({ _id: { $in: user.courses } });
       return res.status(200).json(courses);
     } catch (e) {
-      return res.status(400).json({
-        error: 'No course found',
+      return res.status(500).json({
+        error: 'Internal Server Error ',
       });
     }
   },
