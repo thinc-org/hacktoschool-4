@@ -156,7 +156,7 @@ const ctrl = {
     }
   },
 
-  _getStudentsByCourseTitle: async (req, res) => {
+  getStudentsByCourseTitle: async (req, res) => {
     try {
       const course = await Course.findOne({ title: req.params.title });
       if (!course)
@@ -169,12 +169,6 @@ const ctrl = {
         error: 'Internal Server Error',
       });
     }
-  },
-  get getStudentsByCourseTitle() {
-    return this._getStudentsByCourseTitle;
-  },
-  set getStudentsByCourseTitle(value) {
-    this._getStudentsByCourseTitle = value;
   },
 };
 
