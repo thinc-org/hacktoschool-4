@@ -21,10 +21,10 @@ const ctrl = {
     const user = new User(req.body);
     try {
       const newUser = await user.save();
-      console.log(newUser);
+      // console.log(newUser);
       return res.status(201).json({ newUser });
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       return res.status(400).json({
         error: 'Cant create new user',
       });
@@ -45,11 +45,12 @@ const ctrl = {
       }
       const salt = await bcrypt.genSalt(Number(process.env.SALT));
       const hashPassword = await bcrypt.hash(req.body.password, salt);
-      console.log({ ...req.body, password: hashPassword });
+      // console.log({ ...req.body, password: hashPassword });
       await new User({ ...req.body, password: hashPassword }).save();
       return res.status(201).send({ message: 'User created successfully' });
     } catch (e) {
-      return res.status(500).send({ message: 'Internal Server Error' });
+      // console.log(e);
+      return res.status(400).send({ message: 'User Validation failed' });
     }
   },
 
@@ -139,6 +140,7 @@ const ctrl = {
     }
   },
 
+  // !NOT USED
   //GET /users/courseID/:id
   getStudentsByCourseID: async (req, res) => {
     try {
@@ -154,18 +156,25 @@ const ctrl = {
     }
   },
 
-  //GET /users/courseTitle/:title
-  //return username of all students in the class
-  getStudentsByCourseTitle: async (req, res) => {
+  _getStudentsByCourseTitle: async (req, res) => {
     try {
       const course = await Course.findOne({ title: req.params.title });
+      if (!course)
+        return res.status(400).json({ error: 'Invalid course title' });
       const student = await User.find({ _id: { $in: course.students } });
+      // console.log(student);
       return res.status(200).json(student.map((a) => a.username));
     } catch (e) {
-      return res.status(400).json({
-        error: 'No student joined this course',
+      return res.status(500).json({
+        error: 'Internal Server Error',
       });
     }
+  },
+  get getStudentsByCourseTitle() {
+    return this._getStudentsByCourseTitle;
+  },
+  set getStudentsByCourseTitle(value) {
+    this._getStudentsByCourseTitle = value;
   },
 };
 
