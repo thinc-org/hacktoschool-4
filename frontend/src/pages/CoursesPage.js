@@ -1,6 +1,10 @@
-import React from 'react';
-import CourseCard from '../components/CourseCard';
-import CardStyle from "../components/CourseCard.module.css";
+import React, { useState } from 'react';
+
+import axios from 'axios';
+
+import GetAllCoursesCard from '../components/GetAllCoursesCard';
+
+
 
 const course1 = {
     "title": "cc1",
@@ -32,36 +36,13 @@ const course3 = {
 }
 const courses = [course1, course2, course3];
 
+
+
 const CoursesPage = () => {
     return (
         <>
-            <div className="enrolled-courses-wrapper">
-                <div className="courses-header">
-                    <h1>enrolled</h1>
-                </div>
-                <div className="courses ">
-                    <div className={CardStyle.wrapper}>
-                        <div className="course" style={{ width: "30%", marginRight: "30px" }}>
-                            {courses.map((course) => (
-                                <CourseCard course={course} />
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className='to explore'>
-                <div className='courses-header'>
-                    <h1>to explore</h1>
-                </div>
-                <div className="courses">
-                    <div className={CardStyle.wrapper}>
-                        <div className="course" style={{ width: "30%", marginRight: "30px" }}>
-                            {courses.map((course) => (
-                                <CourseCard course={course} />
-                            ))}
-                        </div>
-                    </div>
-                </div>
+            <div>
+                <GetAllCoursesCard></GetAllCoursesCard>
             </div>
         </>
     );
