@@ -1,7 +1,7 @@
 import React from 'react';
 import { COLORS } from './Colors';
 import styled, { ThemeProvider } from 'styled-components';
-import image from './pictures/contentPicture3.png';
+import image from './pictures/contentPicture2.png';
 
 const theme = {
   colors: COLORS,
@@ -11,8 +11,8 @@ const Card = styled.div`
   display: flex;
   align-items: center;
   flex-direction: row;
-  padding: 3rem 20% 0px 20%;
-  background: ${(props) => props.theme.colors.greylight};
+  padding: 3rem 20%;
+  background: ${(props) => props.theme.colors.white};
 `;
 
 const ContentHeading = styled.div`
@@ -20,41 +20,39 @@ const ContentHeading = styled.div`
 `;
 
 const Media = styled.img`
-  width: 50%;
+  width: 60%;
   height: auto;
 `;
 
 const Content = styled.div`
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   flex-direction: row;
 `;
 
 const Text = styled.div`
   z-index: 10;
-  min-width: 55%;
-  padding: 0px 0px 15% 0px;
 `;
 
-const ContentCardDark = () => {
+const ContentCardLight1 = () => {
   return (
     <>
       <Card>
         <Content>
+          <Media src={image} />
           <Text>
             <ContentHeading>
-              <h2>Increase your</h2>
-              <h2>vocabulary</h2>
+              <h2>Learn a language</h2>
+              <h2>in a playful way</h2>
             </ContentHeading>
             <h6 style={{ color: '#757575' }}>
-              Traditional and new effective approaches to word study
+              Make learning words more fun with mini-games
             </h6>
           </Text>
-          <Media src={image} />
         </Content>
       </Card>
     </>
   );
 };
 
-export default ContentCardDark;
+export default ContentCardLight1;

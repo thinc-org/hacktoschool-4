@@ -13,7 +13,6 @@ const Card = styled.div`
   align-items: center;
   flex-direction: row;
   padding: 3rem 20%;
-  margin: 0px -20% 0px 0px;
   background: ${(props) => props.theme.colors.greylight};
 `;
 
@@ -22,27 +21,26 @@ const ContentHeading = styled.div`
 `;
 
 const Media = styled.img`
-  min-width: 400px;
-  max-width: 70%;
+  width: 80%;
   height: auto;
-  margin: 0px -10% 0px -10%;
+  margin: 0px 0px 0px -10%;
 `;
 
 const Icon = styled.img`
   height: 1.5rem;
   width: auto;
+  margin: 0px 2% 0px 0px;
 `;
 
 const Content = styled.div`
   display: flex;
-  max-width: 80%;
-  align-items: center;
   flex-direction: row;
-  margin: 0px -10% 0px 0px;
+  align-items: center;
 `;
 
 const Text = styled.div`
   z-index: 10;
+  min-width: 50%;
 `;
 
 const ActiveUserText = styled.div`
