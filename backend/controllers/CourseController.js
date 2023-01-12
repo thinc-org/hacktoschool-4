@@ -168,6 +168,19 @@ const ctrl = {
       return res.status(500).send({ message: 'Internal Server Error' });
     }
   },
+
+  //GET /courses/username/:username
+  getCourseByUsername: async (req, res) => {
+    try {
+      const user = await User.findOne({ username: req.params.username });
+      const courses = await Course.find({ _id: { $in: user.courses } });
+      return res.status(200).json(courses);
+    } catch (e) {
+      return res.status(400).json({
+        error: 'No course found',
+      });
+    }
+  },
 };
 
 module.exports = ctrl;

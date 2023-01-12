@@ -127,4 +127,6 @@ routes
   .route('/joinCourse/:title')
   .post(authenticateToken, isStudent, ctrl.joinCourse);
 
+routes.route('/username/:username').get(ctrl.getCourseByUsername);
+
 module.exports = routes;
