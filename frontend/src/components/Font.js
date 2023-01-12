@@ -14,7 +14,7 @@ export const Container = styled.div`
 
   & h2 {
     font-family: 'Dela Gothic One', cursive;
-    font-size: 48px;
+    font-size: 40px;
     line-height: 100%;
     padding: 0px;
     margin: 5px;

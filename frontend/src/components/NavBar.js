@@ -12,6 +12,7 @@ const Nav = styled.nav`
   background: ${(props) => props.theme.colors.greylight};
   top: 0; /* Stick it to the top */
   padding: 1rem 20%;
+  height: 70px;
   box-shadow: inset 0px -1px 0px ${theme.colors.greymedium};
 `;
 
@@ -35,7 +36,7 @@ const Menu = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 850px) {
     display: none;
   }
   font-family: 'Montserrat', sans-serif;
