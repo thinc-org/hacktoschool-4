@@ -1,4 +1,6 @@
 const Course = require('../models/Course');
+const { User } = require('../models/User');
+const jwt_decode = require('jwt-decode');
 
 const ctrl = {
   //GET /courses
@@ -91,6 +93,40 @@ const ctrl = {
       return res.status(400).json({
         error: 'No course found',
       });
+    }
+  },
+
+  //POST /courses/addCours
+  addCourse: async (req, res) => {
+    try {
+      const courseInfo = req.body;
+      if (!courseInfo.title) {
+        return res.status(400).json({
+          error: 'No course title',
+        });
+      }
+
+      // Check if already has course title in DB
+      const existedCourse = await Course.findOne({ title: courseInfo.title });
+      if (existedCourse) {
+        return res
+          .status(409)
+          .send({ message: 'Course title is already taken' });
+      }
+
+      const authHeader = req.headers['authorization'];
+      const token = authHeader && authHeader.split(' ')[1];
+      const decoded = jwt_decode(token);
+      console.log(courseInfo);
+      const course = new Course({ ...courseInfo, instructor: decoded._id });
+      const newCourse = await course.save();
+      await User.updateOne(
+        { _id: decoded._id },
+        { $push: { courses: newCourse._id } },
+      );
+      return res.status(201).send({ message: 'Course succesfully added' });
+    } catch (e) {
+      return res.status(500).send({ message: 'Internal Server Error' });
     }
   },
 };

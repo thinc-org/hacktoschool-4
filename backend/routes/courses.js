@@ -1,7 +1,11 @@
 const express = require('express');
-
 const routes = express.Router();
 const ctrl = require('../controllers/CourseController');
+const {
+  authenticateToken,
+  isStudent,
+  isInstructor,
+} = require('../middlewares/AuthMiddleWare');
 
 /**
  * @swagger
@@ -114,5 +118,9 @@ routes.route('/delete/id/:id').delete(ctrl.deleteCourseByID);
 routes.route('/delete/title/:title').delete(ctrl.deleteCourseByTitle);
 
 routes.route('/arrayOfID').get(ctrl.getCourseByArrayOfID);
+
+routes
+  .route('/addCourse')
+  .post(authenticateToken, isInstructor, ctrl.addCourse);
 
 module.exports = routes;
