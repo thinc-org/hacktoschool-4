@@ -5,6 +5,7 @@ const {
   authenticateToken,
   isStudent,
   isInstructor,
+  isAdmin,
 } = require('../middlewares/AuthMiddleWare');
 
 /**
@@ -92,7 +93,9 @@ routes.route('/title/:title').get(ctrl.getCourseByTitle);
  *      '400':
  *        description: Invalid ID supplied
  */
-routes.route('/delete/id/:id').delete(ctrl.deleteCourseByID);
+routes
+  .route('/delete/id/:id')
+  .delete(authenticateToken, isAdmin, ctrl.deleteCourseByID);
 
 /**
  * @swagger
@@ -115,7 +118,9 @@ routes.route('/delete/id/:id').delete(ctrl.deleteCourseByID);
  *      '400':
  *        description: Invalid title supplied
  */
-routes.route('/delete/title/:title').delete(ctrl.deleteCourseByTitle);
+routes
+  .route('/delete/title/:title')
+  .delete(authenticateToken, isAdmin, ctrl.deleteCourseByTitle);
 
 /**
  * @swagger
@@ -223,6 +228,6 @@ routes
   .route('/joinCourse/:title')
   .post(authenticateToken, isStudent, ctrl.joinCourse);
 
-routes.route('/create').post(ctrl.createCourse);
+routes.route('/create').post(authenticateToken, isAdmin, ctrl.createCourse);
 
 module.exports = routes;
