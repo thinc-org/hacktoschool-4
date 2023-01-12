@@ -31,10 +31,11 @@ const ctrl = {
   getCourseByTitle: async (req, res) => {
     try {
       const course = await Course.findOne({ title: req.params.title });
+      if (!course) return res.status(400).json({ error: 'No course found' });
       return res.status(200).json(course);
     } catch (e) {
-      return res.status(400).json({
-        error: 'No user found',
+      return res.status(500).json({
+        error: 'Internal Server Error',
       });
     }
   },
@@ -91,7 +92,7 @@ const ctrl = {
       return res.status(200).json(courses);
     } catch (e) {
       return res.status(400).json({
-        error: 'No course found',
+        error: 'Invalid Course ID',
       });
     }
   },
