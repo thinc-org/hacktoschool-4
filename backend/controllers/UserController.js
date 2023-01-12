@@ -104,6 +104,36 @@ const ctrl = {
       });
     }
   },
+
+  //DELETE /users/delete-id/:id
+  deleteUserByID: async (req, res) => {
+    try {
+      const user = await User.findByIdAndDelete(req.params.id);
+      return res
+        .status(200)
+        .json({ id: user._id, message: 'Delete user successfully' });
+    } catch (e) {
+      return res.status(400).json({
+        error: 'No user to delete',
+      });
+    }
+  },
+
+  //DELETE /users/delete-username/:username
+  deleteUserByUsername: async (req, res) => {
+    try {
+      const user = await User.findOneAndDelete({
+        username: req.params.username,
+      });
+      return res
+        .status(200)
+        .json({ id: user._id, message: 'Delete user successfully' });
+    } catch (e) {
+      return res.status(400).json({
+        error: 'No user to delete',
+      });
+    }
+  },
 };
 
 module.exports = ctrl;

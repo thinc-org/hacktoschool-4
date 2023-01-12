@@ -111,4 +111,8 @@ routes
 
 routes.route('/create').post(ctrl.createUser);
 
+routes.route('/delete-id/:id').delete(ctrl.deleteUserByID);
+
+routes.route('/delete-username/:username').delete(ctrl.deleteUserByUsername);
+
 module.exports = routes;
