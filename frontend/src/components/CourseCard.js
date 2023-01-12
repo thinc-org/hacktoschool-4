@@ -9,7 +9,7 @@ const CourseCard = ({ course }) => {
                 <p className={CardStyle.title}>{course.title}</p>
                 <div className={CardStyle.course.h2}>{course.description}</div>
                 <div className={CardStyle.course.h3}>{course.instructor}</div>
-                <button>enrolled</button>
+                <button>enroll</button>
 
             </div>
         </div>

@@ -25,7 +25,7 @@ const GetAllCoursesCard = () => {
                 <div className="courses-header">
                     <h1>Courses</h1>
                 </div>
-                <div className="courses ">
+                <div className="courses " style={{ alignContent: 'left' }}>
                     <div className={CardStyle.wrapper}>
                         <div className="course" style={{ width: "100%", marginRight: "30px" }}>
                             {allCourses.map((course) => (
