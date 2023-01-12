@@ -35,6 +35,16 @@ export const Container = styled.div`
     padding: 0px;
     margin: 0px;
   }
+  & h5 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    line-height: 100%;
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
 
   & h6 {
     font-family: 'Montserrat', sans-serif;
