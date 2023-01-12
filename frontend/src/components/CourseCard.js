@@ -7,8 +7,8 @@ const CourseCard = ({ course }) => {
         <div className="course" >
             <div className={CardStyle.course}>
                 <p className={CardStyle.title}>{course.title}</p>
-                <h2>{course.description}</h2>
-                <h3>{course.instructor}</h3>
+                <div className={CardStyle.course.h2}>{course.description}</div>
+                <div className={CardStyle.course.h3}>{course.instructor}</div>
                 <button>enrolled</button>
 
             </div>

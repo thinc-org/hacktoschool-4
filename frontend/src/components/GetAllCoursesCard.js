@@ -21,13 +21,13 @@ const GetAllCoursesCard = () => {
     console.log(allCourses)
     return (
         <>
-            <div className="enrolled-courses-wrapper">
+            <div style={{ margin: '30px' }}>
                 <div className="courses-header">
                     <h1>Courses</h1>
                 </div>
                 <div className="courses ">
                     <div className={CardStyle.wrapper}>
-                        <div className="course" style={{ width: "30%", marginRight: "30px" }}>
+                        <div className="course" style={{ width: "100%", marginRight: "30px" }}>
                             {allCourses.map((course) => (
                                 <CourseCard course={course} />
                             ))}
