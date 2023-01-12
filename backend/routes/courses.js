@@ -123,4 +123,6 @@ routes
   .route('/addCourse')
   .post(authenticateToken, isInstructor, ctrl.addCourse);
 
+routes.route('/username/:username').get(ctrl.getCourseByUsername);
+
 module.exports = routes;
