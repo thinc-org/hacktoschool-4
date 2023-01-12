@@ -8,12 +8,16 @@ export const Container = styled.div`
     font-family: 'Dela Gothic One', cursive;
     font-size: 56px;
     line-height: 120%;
+    padding: 0px;
+    margin: 0px;
   }
 
   & h2 {
     font-family: 'Dela Gothic One', cursive;
     font-size: 48px;
     line-height: 100%;
+    padding: 0px;
+    margin: 5px;
   }
 
   & h3 {
@@ -32,9 +36,9 @@ export const Container = styled.div`
     margin: 0px;
   }
 
-  & NavLink {
-    font-family: 'Dela Gothic One', cursive;
-    font-size: 26px;
+  & h6 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
     line-height: 100%;
     padding: 0px;
     margin: 0px;
