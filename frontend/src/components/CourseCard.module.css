@@ -8,15 +8,15 @@
 }
 .course {
   --card-gradient: rgba(0, 0, 0, 1);
-  --card-gradient: #5e9ad9, #9dd2c3;
+  --card-gradient: #5e99d979, #9dd2c388;
   
   float: left;
-  width: 25%;
+  width: 100%;
   padding: 0 10px;
   --card-blend-mode: overlay;
   --card-blend-mode: multiply;
   width: 300px;
-  display: grid;
+  /* display: grid; */
   /* display: flex; */
   /* flex-direction: column; */
   place-content: center;
@@ -56,10 +56,10 @@
   box-sizing: border-box;
 }
 
-body {
+.course body {
   display: grid;
-  place-content: center;
-  justify-items: center;
+  place-content: left;
+  justify-items: left;
   min-height: 100vh;
   margin: 0;
   padding: 1rem;
@@ -102,22 +102,25 @@ body {
   font-size: 2rem;
   font-weight: 600;
 }
-button {
+.course button {
   background-color: #ffffff;
   padding: 0.8rem;
   font-size: 13px;
   font-weight: 600;
   /* background-color: #444; */
   /* text-transform: uppercase; */
-  border-radius: 4px;
-  font-weight: 400;
-  display: block;
+  border-radius: 10px;
+  font-weight: 600;
+  color: #e1faf1;
+  /* display: block; */
   width: 100%;
   cursor: pointer;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  background: transparent;
+  background: rgb(12, 176, 157);
 }
 
-button:hover {
-  background-color: rgba(255, 255, 255, 0.12);
+.course button:hover {
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
+  background-color: rgb(2, 73, 68);
+  transform: scale(1.01);
 }
