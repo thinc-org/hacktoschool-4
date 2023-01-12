@@ -27,7 +27,7 @@ const GetAllCoursesCard = () => {
                 </div>
                 <div className="courses " style={{ alignContent: 'left' }}>
                     <div className={CardStyle.wrapper}>
-                        <div className="course" style={{ width: "100%", marginRight: "30px" }}>
+                        <div className="course" style={{ width: "100%", marginRight: "10px" }}>
                             {allCourses.map((course) => (
                                 <CourseCard course={course} />
                             ))}

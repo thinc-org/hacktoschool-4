@@ -74,11 +74,13 @@
   margin-top: 1rem;
   font-family: 'Montserrat', sans-serif;
   font-size: small;
+  margin-bottom: 2px;
 }
 .course h2 {
   margin-top: 1rem;
   font-family: 'Montserrat', sans-serif;
   font-size: medium;
+  margin-bottom: 2px;
 }
 
 .course {
@@ -104,14 +106,14 @@
   font-size: 2rem;
   font-weight: 600;
 }
-.course button {
+.course a {
   
   padding: 0.8rem;
-  font-size: 13px; 
+  font-size: 14px; 
   font-weight: 600;
   
   border-radius: 10px;
-  font-weight: 600;
+  font-weight: 700px;
   color: #e1faf1;
   font-family: 'Montserrat',sans-serif;
   width: 100%;
@@ -126,13 +128,20 @@
     outline: none;
     border: none;
     cursor: pointer;
+    margin: 2px;
+   
+    padding-left: 120px;
+    padding-right: 120px;
+  align-self: stretch;
+  justify-self: right;
+    
     -webkit-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
     -webkit-text-decoration: none;
     text-decoration: none;
 }
 
-.course button:hover {
+.course a:hover {
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
   background-color: rgb(2, 73, 68);
   transform: scale(1.01);

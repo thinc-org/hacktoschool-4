@@ -1,0 +1,127 @@
+
+
+      *,
+*:before,
+*:after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.background{
+    width: 430px;
+    height: 550px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
+}
+
+
+form{
+    /* height: 430px; */
+    width: 330px;
+    background-color: rgba(255,255,255,0.13);
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(80px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 40px 30px;
+}
+form *{
+    
+    color: #242d2a;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+}
+/* form h3{
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;
+} */
+
+label{
+    display: block;
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 600;
+}
+input{
+    display: block;
+    height: 35px;
+    width: 100%;
+    background-color: rgba(173, 213, 204, 0.919);
+    border-color: #2b788b;
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+input[type="radio"] {
+    /* ...existing styles */
+    display: grid;
+    width: 7%;
+    place-content: center;
+    
+  }
+  
+  input[type="radio"]::before {
+    content: "";
+    width: 10%;
+    height: 0.65em;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--form-control-color);
+  }
+  
+  input[type="radio"]:checked::before {
+    transform: scale(1);
+  }
+
+
+.form-submit {
+   
+    padding: 0.8rem;
+    font-size: 14px; 
+    font-weight: 600;
+    
+    border-radius: 10px;
+    font-weight: 700px;
+    color: #e1faf1;
+    font-family: 'Montserrat',sans-serif;
+    width: 100%;
+    /* cursor: pointer; */
+    /* border: 1px solid rgba(255, 255, 255, 0.2); */
+    /* background: rgb(12, 176, 157); */
+    margin-top: 10px;  
+    border-radius: 1rem;
+      background: #2B788B;
+      padding: 0.5rem 1rem;
+      color: #fff;
+      outline: none;
+      border: none;
+      cursor: pointer;
+      margin: 2px;
+     
+      /* padding-left: 120px;
+      padding-right: 120px; */
+    align-self: stretch;
+    justify-self: right;
+      
+      -webkit-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
+      -webkit-text-decoration: none;
+      text-decoration: none;
+  
+}  
+
+    

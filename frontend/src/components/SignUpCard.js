@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { registerUser } from '../api/UserAPI';
+import "./SignInStyle.css";
 
 const SignUpCard = () => {
   const [data, setData] = useState({
@@ -35,6 +36,7 @@ const SignUpCard = () => {
     <>
       <div>
         <form onSubmit={handleSubmit}>
+          <h3>SIGN UP</h3>
           <label htmlFor="username">username:</label>
           <input
             type="text"
@@ -54,7 +56,7 @@ const SignUpCard = () => {
             required
           ></input>
 
-          <h2>Please select your role:</h2>
+          <label>Please select your role:</label>
           <div>
             <input
               type="radio"
@@ -76,7 +78,7 @@ const SignUpCard = () => {
             <label htmlFor="instructor">instructor</label>
           </div>
           {error && <div>{error}</div>}
-          <input type="submit" value="Submit"></input>
+          <input type="submit" value="Submit" className='form-submit' ></input>
         </form>
       </div>
     </>
