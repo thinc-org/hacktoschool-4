@@ -57,8 +57,8 @@ const MainContentCard = () => {
           <Text>
             <h6 style={{ color: '#2B788B' }}>E-COURSE PLATFORM</h6>
             <ContentHeading>
-              <h2>Learning</h2>
-              <h2>and teaching online,</h2>
+              <h2>Learning and</h2>
+              <h2>teaching online,</h2>
               <h2>made easy.</h2>
             </ContentHeading>
             <h6 style={{ color: '#757575' }}>
