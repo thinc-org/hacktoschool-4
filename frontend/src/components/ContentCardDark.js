@@ -21,6 +21,7 @@ const ContentHeading = styled.div`
 
 const Media = styled.img`
   width: 50%;
+  margin: 0px 0px 0px -8%;
   height: auto;
 `;
 
