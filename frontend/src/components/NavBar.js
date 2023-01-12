@@ -11,7 +11,7 @@ const theme = {
 const Nav = styled.nav`
   background: ${(props) => props.theme.colors.greylight};
   top: 0; /* Stick it to the top */
-  padding: 1rem 10%;
+  padding: 1rem 20%;
   box-shadow: inset 0px -1px 0px ${theme.colors.greymedium};
 `;
 
@@ -27,7 +27,6 @@ const SignMenu = styled.div`
   align-items: center;
   flex-direction: row;
   gap: 1.5em;
-  }
 `;
 
 const Menu = styled.div`
