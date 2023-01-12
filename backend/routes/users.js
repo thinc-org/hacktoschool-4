@@ -101,11 +101,9 @@ routes.route('/username/:username').get(ctrl.getUserByUsername);
  *       '201':
  *         description: User created successfully
  *       '400':
- *         description: validate error, please check whether the body is correct
+ *         description: User Validation failed, please check whether the body is correct
  *       '409':
  *         description: Username is already in used
- *       '500':
- *         description: Internal Server Error
  */
 routes.route('/register').post(ctrl.registerUser);
 
@@ -155,14 +153,35 @@ routes.route('/delete/id/:id').delete(ctrl.deleteUserByID);
  */
 routes.route('/delete/username/:username').delete(ctrl.deleteUserByUsername);
 
+/**
+ * @swagger
+ * /users/courseTitle/{title}:
+ *  get:
+ *    tags:
+ *      - users
+ *    summary: Find all student enrolled in that course title
+ *    description: Return array of username of all students in the course
+ *    parameters:
+ *      - name: title
+ *        in: path
+ *        description: title of the course
+ *        required: true
+ *        schema:
+ *          type: string
+ *    responses:
+ *      '200':
+ *        description: Successful operation
+ *      '400':
+ *        description: Invalid ID supplied
+ */
+routes.route('/courseTitle/:title').get(ctrl.getStudentsByCourseTitle);
+
+routes.route('/courseID/:id').get(ctrl.getStudentsByCourseID);
+
 routes
   .route('/testAuthenToken')
   .get(authenticateToken, isStudent, ctrl.getUsers);
 
 routes.route('/create').post(ctrl.createUser);
-
-routes.route('/courseID/:id').get(ctrl.getStudentsByCourseID);
-
-routes.route('/courseTitle/:title').get(ctrl.getStudentsByCourseTitle);
 
 module.exports = routes;
