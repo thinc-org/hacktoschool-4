@@ -1,4 +1,5 @@
 const { User, validateRegister, validateLogin } = require('../models/User');
+const Course = require('../models/Course');
 const bcrypt = require('bcrypt');
 const Joi = require('Joi');
 
@@ -145,6 +146,20 @@ const ctrl = {
         courses: req.params.id,
       });
       return res.status(200).json(students);
+    } catch (e) {
+      return res.status(400).json({
+        error: 'No student joined this course',
+      });
+    }
+  },
+
+  //GET /users/courseTitle/:title
+  //return username of all students in the class
+  getStudentsByCourseTitle: async (req, res) => {
+    try {
+      const course = await Course.findOne({ title: req.params.title });
+      const student = await User.find({ _id: { $in: course.students } });
+      return res.status(200).json(student.map((a) => a.username));
     } catch (e) {
       return res.status(400).json({
         error: 'No student joined this course',

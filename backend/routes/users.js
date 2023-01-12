@@ -161,4 +161,6 @@ routes.route('/create').post(ctrl.createUser);
 
 routes.route('/courseID/:id').get(ctrl.getStudentsByCourseID);
 
+routes.route('/courseTitle/:title').get(ctrl.getStudentsByCourseTitle);
+
 module.exports = routes;
