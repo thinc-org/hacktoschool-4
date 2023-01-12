@@ -73,9 +73,11 @@ const ctrl = {
         return res.status(401).send({ message: 'Invalid Email or Password' });
       }
       const token = user.generateAuthToken();
-      return res
-        .status(200)
-        .send({ accessToken: token, message: 'Logged in successfully' });
+      return res.status(200).send({
+        role: user.role,
+        accessToken: token,
+        message: 'Logged in successfully',
+      });
     } catch (e) {
       return res.status(500).send({ message: 'Internal Server Error' });
     }
@@ -101,6 +103,36 @@ const ctrl = {
     } catch (e) {
       return res.status(400).json({
         error: 'No user found',
+      });
+    }
+  },
+
+  //DELETE /users/delete/id/:id
+  deleteUserByID: async (req, res) => {
+    try {
+      const user = await User.findByIdAndDelete(req.params.id);
+      return res
+        .status(200)
+        .json({ id: user._id, message: 'Delete user successfully' });
+    } catch (e) {
+      return res.status(400).json({
+        error: 'No user to delete',
+      });
+    }
+  },
+
+  //DELETE /users/delete/username/:username
+  deleteUserByUsername: async (req, res) => {
+    try {
+      const user = await User.findOneAndDelete({
+        username: req.params.username,
+      });
+      return res
+        .status(200)
+        .json({ id: user._id, message: 'Delete user successfully' });
+    } catch (e) {
+      return res.status(400).json({
+        error: 'No user to delete',
       });
     }
   },
