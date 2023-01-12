@@ -52,7 +52,7 @@ routes.route('/id/:id').get(ctrl.getUserByID);
  *    tags:
  *      - users
  *    summary: Find user by username
- *    description: Returns a single user
+ *    description: Returns a single user object
  *    parameters:
  *      - name: username
  *        in: path
@@ -65,6 +65,8 @@ routes.route('/id/:id').get(ctrl.getUserByID);
  *        description: successful operation
  *      '400':
  *        description: Invalid username supplied
+ *      '500':
+ *        description: Internal Server Error
  */
 routes.route('/username/:username').get(ctrl.getUserByUsername);
 
