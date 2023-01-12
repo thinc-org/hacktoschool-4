@@ -81,6 +81,18 @@ const ctrl = {
       });
     }
   },
+
+  //GET /courses/arrayOfID
+  getCourseByArrayOfID: async (req, res) => {
+    try {
+      const courses = await Course.find({ _id: { $in: req.body.id } });
+      return res.status(200).json(courses);
+    } catch (e) {
+      return res.status(400).json({
+        error: 'No course found',
+      });
+    }
+  },
 };
 
 module.exports = ctrl;

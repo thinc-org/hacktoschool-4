@@ -136,6 +136,21 @@ const ctrl = {
       });
     }
   },
+
+  //GET /users/courseID/:id
+  getStudentsByCourseID: async (req, res) => {
+    try {
+      const students = await User.find({
+        role: 'Student',
+        courses: req.params.id,
+      });
+      return res.status(200).json(students);
+    } catch (e) {
+      return res.status(400).json({
+        error: 'No student joined this course',
+      });
+    }
+  },
 };
 
 module.exports = ctrl;

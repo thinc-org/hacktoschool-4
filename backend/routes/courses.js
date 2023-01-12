@@ -113,4 +113,6 @@ routes.route('/delete/id/:id').delete(ctrl.deleteCourseByID);
  */
 routes.route('/delete/title/:title').delete(ctrl.deleteCourseByTitle);
 
+routes.route('/arrayOfID').get(ctrl.getCourseByArrayOfID);
+
 module.exports = routes;
