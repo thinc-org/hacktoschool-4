@@ -129,6 +129,45 @@ const ctrl = {
       return res.status(500).send({ message: 'Internal Server Error' });
     }
   },
+
+  //POST /courses/joinCourse/:title
+  joinCourse: async (req, res) => {
+    try {
+      const courseTitle = req.params.title;
+      if (!courseTitle) {
+        return res.status(400).json({
+          error: 'No course title',
+        });
+      }
+
+      // Check if course title exist in DB
+      const existedCourse = await Course.findOne({ title: courseTitle });
+      if (!existedCourse) {
+        return res.status(400).send({ message: 'Course title not exist' });
+      }
+      const courseID = existedCourse._id;
+
+      // Check if the user already join the course.
+      const authHeader = req.headers['authorization'];
+      const token = authHeader && authHeader.split(' ')[1];
+      const userID = jwt_decode(token)._id;
+      const joinedCourses = User.findById(userID).courses;
+      if (
+        (joinedCourses && joinedCourses.includes(courseID)) ||
+        existedCourse.students.includes(userID)
+      ) {
+        return res.status(409).send({ message: 'User already join course' });
+      }
+      await User.updateOne({ _id: userID }, { $push: { courses: courseID } });
+      await Course.updateOne(
+        { _id: courseID },
+        { $push: { students: userID } },
+      );
+      return res.status(201).send({ message: 'Succesfully joined' });
+    } catch (e) {
+      return res.status(500).send({ message: 'Internal Server Error' });
+    }
+  },
 };
 
 module.exports = ctrl;

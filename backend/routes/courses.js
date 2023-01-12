@@ -123,4 +123,8 @@ routes
   .route('/addCourse')
   .post(authenticateToken, isInstructor, ctrl.addCourse);
 
+routes
+  .route('/joinCourse/:title')
+  .post(authenticateToken, isStudent, ctrl.joinCourse);
+
 module.exports = routes;
