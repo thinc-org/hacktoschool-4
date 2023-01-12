@@ -1,11 +1,15 @@
 import React from 'react';
-import ContentCard from '../components/ContentCard';
+import ContentCardDark from '../components/ContentCardDark';
+import ContentCardLight from '../components/ContentCardLight';
+import MainContentCard from '../components/MainContentCard';
 
 const Home = () => {
   return (
     <div>
-      <ContentCard></ContentCard>
-      <ContentCard></ContentCard>
+      <MainContentCard></MainContentCard>
+      <ContentCardLight></ContentCardLight>
+      <ContentCardDark></ContentCardDark>
+      <ContentCardLight></ContentCardLight>
     </div>
   );
 };

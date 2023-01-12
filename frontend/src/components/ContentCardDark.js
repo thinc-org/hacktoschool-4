@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ContentCard = () => {
+const ContentCardDark = () => {
   return (
     <>
       <div>
@@ -11,4 +11,4 @@ const ContentCard = () => {
   );
 };
 
-export default ContentCard;
+export default ContentCardDark;
