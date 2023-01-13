@@ -17,7 +17,7 @@ const SignInCard = () => {
     e.preventDefault();
     try {
       await loginUser(data);
-      navigate('/');
+      window.location = '/';
     } catch (error) {
       if (
         error.response &&
