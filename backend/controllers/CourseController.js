@@ -6,7 +6,22 @@ const ctrl = {
   //GET /courses
   getCourses: async (req, res) => {
     try {
-      const courses = await Course.find();
+      const courses = await Course.aggregate([
+        {
+          $lookup: {
+            from: 'users',
+            localField: 'instructor',
+            foreignField: '_id',
+            as: 'instructorName',
+          },
+        },
+        {
+          $set: {
+            instructor: { $arrayElemAt: ['$instructorName.username', 0] },
+          },
+        },
+      ]);
+      console.log(courses);
       return res.status(200).json(courses);
     } catch (e) {
       return res.status(400).json({
