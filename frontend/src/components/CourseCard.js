@@ -23,14 +23,17 @@ const CourseCard = ({
   };
   return (
     //if that course is in that student list there will be no button
-    <div
-      className="course"
-      onClick={() => {
-        navigate(`/${linkTo}/${course.title}`);
-      }}
-    >
+    <div className="course">
       <div className={CardStyle.course}>
-        <p className={CardStyle.title}>{course.title}</p>
+        <p
+          onClick={() => {
+            navigate(`/${linkTo}/${course.title}`);
+          }}
+          style={{ cursor: 'pointer' }}
+          className={CardStyle.title}
+        >
+          {course.title}
+        </p>
         <br></br>
         <div className={CardStyle.course.h2}>{course.description}</div>
         <div className={CardStyle.course.h3}>{course.instructor}</div>
