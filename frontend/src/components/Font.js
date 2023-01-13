@@ -18,6 +18,11 @@ export const Container = styled.div`
     line-height: 100%;
     padding: 0px;
     margin: 5px;
+    @media screen and (max-width: 850px) {
+      display: flex;
+      justify-content: center;
+      font-size: 30px;
+    }
   }
 
   & h3 {
@@ -26,6 +31,9 @@ export const Container = styled.div`
     line-height: 100%;
     padding: 0px;
     margin: 0px;
+    @media screen and (max-width: 850px) {
+      font-size: 20px;
+    }
   }
 
   & h4 {
@@ -42,7 +50,8 @@ export const Container = styled.div`
     padding: 0px;
     margin: 0px;
     display: flex;
-    justify-content: center;
+    text-align: center;
+    font-weight: normal;
     margin-top: 0.5rem;
   }
 
@@ -52,5 +61,10 @@ export const Container = styled.div`
     line-height: 100%;
     padding: 0px;
     margin: 0px;
+    @media screen and (max-width: 850px) {
+      font-size: 12px;
+      display: flex;
+      justify-content: center;
+    }
   }
 `;
