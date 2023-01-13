@@ -6,7 +6,13 @@ const SignMenu = styled.div`
   display: flex;
   align-items: center;
   flex-direction: row;
-  gap: 1.5em;
+  justify-content: space-between;
+  max-width: 180px;
+  width: 30%;
+  @media screen and (max-width: 850px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const NavLink = styled(Link)`
@@ -34,6 +40,20 @@ const NavBtnLink = styled(Link)`
     transition: all 0.2s ease-in-out;
     background: ${(props) => props.theme.colors.white};
     color: ${(props) => props.theme.colors.cyandark};
+  }
+
+  @media screen and (max-width: 850px) {
+    color: ${(props) => props.theme.colors.greydark};
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 0rem;
+    padding: 0px;
+    background: none;
+    &.active {
+      color: ${(props) => props.theme.colors.black};
+      background: none;
+    }
   }
 `;
 
