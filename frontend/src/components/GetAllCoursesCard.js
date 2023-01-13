@@ -47,7 +47,11 @@ const GetAllCoursesCard = () => {
                     <div className="courses-header">enrolled</div>
                     <div>
                       {enrolledCourses.map((course) => (
-                        <CourseCard course={course} isEnrolled={true} />
+                        <CourseCard
+                          course={course}
+                          isEnrolled={true}
+                          linkTo="courses"
+                        />
                       ))}
                     </div>
                     <hr></hr>
@@ -59,6 +63,7 @@ const GetAllCoursesCard = () => {
                           isEnrolled={false}
                           setEnrolledCourses={setEnrolledCourses}
                           setUnEnrolledCourses={setUnEnrolledCourses}
+                          linkTo="courses"
                         />
                       ))}
                     </div>
@@ -68,7 +73,11 @@ const GetAllCoursesCard = () => {
                     <div className="courses-header">explore</div>{' '}
                     <div>
                       {allCourses.map((course) => (
-                        <CourseCard course={course} isEnrolled={false} />
+                        <CourseCard
+                          course={course}
+                          isEnrolled={false}
+                          linkTo="courses"
+                        />
                       ))}
                     </div>
                   </>

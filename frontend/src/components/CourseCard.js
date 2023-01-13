@@ -9,6 +9,7 @@ const CourseCard = ({
   isEnrolled,
   setEnrolledCourses,
   setUnEnrolledCourses,
+  linkTo,
 }) => {
   const navigate = useNavigate();
   const handleEnroll = async () => {
@@ -25,7 +26,7 @@ const CourseCard = ({
     <div
       className="course"
       onClick={() => {
-        navigate(`/courses/${course.title}`);
+        navigate(`/${linkTo}/${course.title}`);
       }}
     >
       <div className={CardStyle.course}>

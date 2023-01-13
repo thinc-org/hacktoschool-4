@@ -25,7 +25,11 @@ const Dashboard = () => {
         <div className={CardStyle.wrapper}>
           <div>
             {coursesByInst.map((course) => (
-              <CourseCard course={course} isEnrolled={true} />
+              <CourseCard
+                course={course}
+                isEnrolled={true}
+                linkTo="dashboard"
+              />
             ))}
           </div>
           {
