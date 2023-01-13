@@ -11,15 +11,17 @@ const config = {
 export const getCourseAll = async () => {
   const url = courseURL;
   const res = await axios.get(url);
-  // localStorage.setItem('jwt', res.accessToken);
-  // localStorage.setItem('role', res.role);
-  console.log(res.message);
   return res.data;
 };
 
 export const addCourse = async (title) => {
-  const url = `${courseURL}/addCourse`;
+  const url = `${courseURL}addCourse`;
   const res = await axios.post(url, { title: title }, config);
-  console.log(res.message);
-  return res.message;
+  return res.data;
+};
+
+export const getCourseByTitle = async (title) => {
+  const url = `${courseURL}title/${title}`;
+  const res = await axios.get(url);
+  return res.data;
 };

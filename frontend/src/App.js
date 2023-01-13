@@ -10,6 +10,7 @@ import SignUpPage from './pages/SignUpPage';
 import InstructorRoute from './routes/InstructorRoutes';
 import CoursesPage from './pages/CoursesPage';
 import CreateCourse from './pages/CreateCourse';
+import CourseDetail from './pages/CourseDetail';
 
 const theme = {
   colors: COLORS,
@@ -34,6 +35,7 @@ function App() {
                 <InstructorRoute Component={CreateCourse} to="/courses" />
               }
             />
+            <Route path="courses/:title" element={<CourseDetail />} />
           </Routes>
           <Footer></Footer>
         </Container>
