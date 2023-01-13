@@ -79,8 +79,24 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  /* grid-template-columns: repeat(auto-fit, minmax(30ch, 1fr)); */
+  grid-gap: 1.5rem;
+  max-width: 100vw;
+  width: auto;
+  padding-left: 0rem;
+  padding-right: 1rem;
+}
+.sec{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(30ch, 1fr));
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  /* grid-template-columns: repeat(auto-fit, minmax(30ch, 1fr)); */
   grid-gap: 1.5rem;
   max-width: 100vw;
   width: auto;

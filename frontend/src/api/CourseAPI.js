@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { title } from 'process';
 import { config } from '../util/headerConfig';
 
 const basedURL = 'http://localhost:8080/api/'; // in dev ==> http://localhost:8080/api/
@@ -38,6 +39,12 @@ export const getCourseByUsername = async (username) => {
 }
 export const getUnenrolledCourseByUsername = async (username) => {
     const url = `${courseURL}unenrolled/${username}`;
-    const res = await axios.get(url);
+    const res = await axios.get(url, config);
     return res.data;
+}
+
+export const joinCourseByTitle = async (title) => {
+    const url = `${basedURL}joinCourse/${title}`;
+    const res = await axios.post(url, { title: title }, config);
+    console.log(res.data);
 }

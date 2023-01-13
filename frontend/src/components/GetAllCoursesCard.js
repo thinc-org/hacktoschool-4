@@ -14,36 +14,7 @@ const GetAllCoursesCard = () => {
   const [unEnrolledCourses, setUnEnrolledCourses] = useState([]);
   const [enrolledCourses, setEnrolledCourses] = useState([]);
 
-
-  // const allCoursesEle = <><div className="courses-header">explore</div> <div> {allCourses.map((course) => (
-  //   <CourseCard course={course} isEnrolled
-  //     ={false} />
-  // ))}
-  // </div >
-  // </>
-
-
-
-  // const loggedInCoursesEle = <>
-  //   <div className="courses-header">enrolled</div>
-  //   <div>{enrolledCourses.map((course) => (
-  //     <CourseCard course={course} isEnrolled
-  //       ={false} />
-  //   ))}
-
-  //   </div>
-  //   <div className="courses-header">explore</div> <div> {unEnrolledCourses.map((course) => (
-  //     <CourseCard course={course} isEnrolled
-  //       ={false} />
-  //   ))}
-  //   </div>
-
-  // </>
-
-
   useEffect(() => {
-
-
     if (isLoggedInStudent) {
       // test with all courses
       getUnenrolledCourseByUsername(localStorage.getItem("username")).then((courses) => setUnEnrolledCourses(courses));
@@ -54,50 +25,39 @@ const GetAllCoursesCard = () => {
     }
 
   }, []);
-
-
   //since res use await which takes time, getCourseAll will take more time and then work itself later on
 
-  //
-  // setAllCourses(getCourseAll());
   return (
     <>
       <div style={{ margin: '30px' }}>
         <div className="courses-header">
           <h1>Courses</h1>
         </div>
-        {/*  */}
         <div className="courses " style={{ alignContent: 'left' }}>
           <div className={CardStyle.wrapper}>
+            {/* ^^might add wrapper css */}
             <div
               className="course"
               style={{ width: '100%', marginRight: '30px' }}
             >
               <div>
                 {isLoggedInStudent ? (<><div className="courses-header">enrolled</div>
-                  <div>{enrolledCourses.map((course) => (
+                  <div >{enrolledCourses.map((course) => (
                     <CourseCard course={course} isEnrolled
-                      ={false} />
+                      ={true} />
                   ))}
 
                   </div>
-                  <div className="courses-header">explore</div> <div> {unEnrolledCourses.map((course) => (
+                  <hr ></hr>
+                  <div className="courses-header">explore</div> <div > {unEnrolledCourses.map((course) => (
                     <CourseCard course={course} isEnrolled
                       ={false} />
                   ))}
-                  </div></>) : (<><div className="courses-header">explore</div> <div> {allCourses.map((course) => (
+                  </div></>) : (<><div className="courses-header">explore</div> <div > {allCourses.map((course) => (
                     <CourseCard course={course} isEnrolled
                       ={false} />
                   ))}
                   </div ></>)}
-
-
-
-
-                {/* <CoursesEle></CoursesEle> */}
-
-
-
 
 
               </div>
