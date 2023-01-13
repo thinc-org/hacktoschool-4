@@ -217,7 +217,25 @@ const ctrl = {
     try {
       const user = await User.findOne({ username: req.params.username });
       if (!user) return res.status(400).json({ error: 'Invalid username' });
-      const courses = await Course.find({ _id: { $in: user.courses } });
+      const courses = await Course.aggregate([
+        {
+          $match: { _id: { $in: user.courses } },
+        },
+        {
+          $lookup: {
+            from: 'users',
+            localField: 'instructor',
+            foreignField: '_id',
+            as: 'instructorName',
+          },
+        },
+        {
+          $set: {
+            instructor: { $arrayElemAt: ['$instructorName.username', 0] },
+          },
+        },
+      ]);
+      // _id: { $in: user.courses }
       return res.status(200).json(courses);
     } catch (e) {
       return res.status(500).json({
@@ -231,7 +249,24 @@ const ctrl = {
     try {
       const user = await User.findOne({ username: req.params.username });
       if (!user) return res.status(400).json({ error: 'Invalid username' });
-      const courses = await Course.find({ _id: { $nin: user.courses } });
+      const courses = await await Course.aggregate([
+        {
+          $match: { _id: { $nin: user.courses } },
+        },
+        {
+          $lookup: {
+            from: 'users',
+            localField: 'instructor',
+            foreignField: '_id',
+            as: 'instructorName',
+          },
+        },
+        {
+          $set: {
+            instructor: { $arrayElemAt: ['$instructorName.username', 0] },
+          },
+        },
+      ]);
       return res.status(200).json(courses);
     } catch (e) {
       return res.status(500).json({
