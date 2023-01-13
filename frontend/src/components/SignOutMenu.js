@@ -95,6 +95,9 @@ const SmallLogout = styled.div`
 const UsernameText = styled.p`
   color: ${COLORS.greydark};
   font-weight: 900;
+  @media screen and (max-width: 400px) {
+    display: none;
+  }
 `;
 
 const SmallMenu = styled.div`

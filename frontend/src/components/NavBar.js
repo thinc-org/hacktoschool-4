@@ -146,7 +146,7 @@ const Navbar = () => {
             {isAutheticated() ? (
               <SignOutMenu username={username} setUsername={setUsername} />
             ) : (
-              <div style={{ width: '20%' }}></div>
+              <div style={{ width: '30%' }}></div>
             )}
           </SmallHeader>
         </Bar>
