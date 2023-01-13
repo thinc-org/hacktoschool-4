@@ -16,6 +16,7 @@ export const loginUser = async (data) => {
 export const logoutUser = async (data) => {
   localStorage.removeItem('jwt');
   localStorage.removeItem('role');
+  localStorage.removeItem('username');
 };
 
 export const isAutheticated = () => {
