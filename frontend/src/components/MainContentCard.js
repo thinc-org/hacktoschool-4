@@ -24,6 +24,7 @@ const Card = styled.div`
 
 const ContentHeading = styled.div`
   padding: 1rem 0px 2rem 0px;
+  cursor: pointer;
   @media screen and (max-width: 850px) {
     padding: 0.5rem 0px 1rem 0px;
   }
@@ -107,13 +108,19 @@ const MainContentCard = () => {
   const [numberUser, setNumberUser] = useState([]);
   getNumberUser().then((numberUser) => setNumberUser(numberUser));
 
+  const copyToClipboard = () => {
+    var copyText = 'Hack to school 🎉';
+    console.log('hello');
+    navigator.clipboard.writeText(copyText).then(() => {});
+  };
+
   return (
     <>
       <Card>
         <Content>
           <Text>
             <h6 style={{ color: '#2B788B' }}>E-COURSE PLATFORM</h6>
-            <ContentHeading>
+            <ContentHeading onclick={copyToClipboard()}>
               <h1>Learning and</h1>
               <h1>teaching online,</h1>
               <h1>made easy.</h1>
