@@ -46,7 +46,7 @@ const NavLink = styled(Link)`
 `;
 
 const Line = styled.div`
-  border-top: 2px solid green;
+  border-top: 1px solid green;
   border-color: ${(props) => props.theme.colors.greymedium};
 `;
 
@@ -56,8 +56,20 @@ const Logo = styled.img`
 `;
 
 const ContentBlock = styled.div`
-  justify-content: space-around;
+  justify-content: center;
   gap: 1.5em;
+`;
+
+const BottomText = styled.div`
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  line-height: 100%;
+  display: flex;
+  font-weight: normal;
+  justify-content: center;
+  margin-top: 0.5rem;
+  color: #757575;
 `;
 
 const Footer = () => {
@@ -77,9 +89,9 @@ const Footer = () => {
               </NavMenu>
             </Menu>
             <Line></Line>
-            <h5 style={{ color: '#757575' }}>
+            <BottomText>
               ©2021 Thinc. x Cleverse. Project for hack to school
-            </h5>
+            </BottomText>
           </ContentBlock>
         </Bar>
       </ThemeProvider>
