@@ -18,7 +18,7 @@ const CreateCourseForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await addCourse(data.title);
+      await addCourse({ title: data.title, description: data.description });
       navigate('/dashboard');
     } catch (error) {
       if (

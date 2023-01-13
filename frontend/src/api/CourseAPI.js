@@ -11,9 +11,9 @@ export const getCourseAll = async () => {
   return res.data;
 };
 
-export const addCourse = async (title) => {
+export const addCourse = async (data) => {
   const url = `${courseURL}addCourse`;
-  const res = await axios.post(url, { title: title }, config);
+  const res = await axios.post(url, data, config);
   return res.data;
 };
 

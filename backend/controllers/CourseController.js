@@ -193,13 +193,34 @@ const ctrl = {
         return res.status(409).send({ message: 'User already join course' });
       }
       await User.updateOne({ _id: userID }, { $push: { courses: courseID } });
-      const course = await Course.findByIdAndUpdate(
-        courseID,
+      // const course = await Course.findByIdAndUpdate(
+      //   courseID,
+      //   {
+      //     $push: { students: userID },
+      //   },
+      //   { lean: true },
+      // );
+      const course = await Course.aggregate([
+        {
+          $match: { _id: courseID },
+        },
         {
           $push: { students: userID },
         },
-        { lean: true },
-      );
+        {
+          $lookup: {
+            from: 'users',
+            localField: 'instructor',
+            foreignField: '_id',
+            as: 'instructorName',
+          },
+        },
+        {
+          $set: {
+            instructor: { $arrayElemAt: ['$instructorName.username', 0] },
+          },
+        },
+      ]);
       // const course = await Course.updateOne(
       //   { _id: courseID },
       //   { $push: { students: userID } },
