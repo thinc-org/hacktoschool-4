@@ -1,12 +1,8 @@
 import axios from 'axios';
+import { config } from '../util/headerConfig';
 
 const basedURL = 'http://localhost:8080/api/'; // in dev ==> http://localhost:8080/api/
 const courseURL = `${basedURL}courses/`;
-
-// USED when Authorization needed.
-const config = {
-  headers: { Authorization: `Bearer ${localStorage.getItem('jwt')}` },
-};
 
 export const getCourseAll = async () => {
   const url = courseURL;
