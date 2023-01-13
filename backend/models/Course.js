@@ -16,8 +16,8 @@ const courseSchema = new mongoose.Schema({
   students: {
     type: [mongoose.SchemaTypes.ObjectId],
   },
-  annoucement: {
-    type: [String],
+  announcement: {
+    type: String,
   },
   createdAt: {
     type: Date,
