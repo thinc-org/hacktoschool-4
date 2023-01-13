@@ -249,7 +249,7 @@ const ctrl = {
     try {
       const user = await User.findOne({ username: req.params.username });
       if (!user) return res.status(400).json({ error: 'Invalid username' });
-      const courses = await await Course.aggregate([
+      const courses = await Course.aggregate([
         {
           $match: { _id: { $nin: user.courses } },
         },
