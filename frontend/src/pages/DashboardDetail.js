@@ -15,6 +15,14 @@ const DashboardDetail = () => {
       .catch((e) => navigate('/dashboard'));
   }, []);
 
+  useEffect(() => {
+    setInterval(() => {
+      getStudentsByCourseTitle(title)
+        .then((students) => setStudents(students))
+        .catch((e) => navigate('/dashboard'));
+    }, 5000);
+  }, []);
+
   const handleChange = ({ currentTarget: input }) => {
     setAnnouncement(input.value);
   };
@@ -53,6 +61,8 @@ const DashboardDetail = () => {
         />
         <input type="submit" value="Submit" className="form-submit"></input>
       </form>
+      <h1>Student Amount</h1>
+      <p>{students.length}</p>
     </>
   );
 };
