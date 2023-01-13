@@ -9,8 +9,6 @@ const CourseCard = ({
   isEnrolled,
   setEnrolledCourses,
   setUnEnrolledCourses,
-  unEnrolledCourses,
-  enrolledCourses,
 }) => {
   const handleEnroll = async () => {
     const newCourse = await joinCourseByTitle(course.title);
@@ -34,15 +32,15 @@ const CourseCard = ({
         <div style={{ marginTop: '60px', marginBottom: '60px' }}></div>
         <div>
           {isEnrolled ? (
-            <div></div>
+            <></>
           ) : isStudent() ? (
-            <a onClick={handleEnroll} className={CardStyle.course.a}>
+            <Link onClick={handleEnroll} className={CardStyle.course.a}>
               enroll
-            </a>
+            </Link>
           ) : (
-            <a href="../sign-in" className={CardStyle.course.a}>
-              enkkk
-            </a>
+            <Link to="../sign-in" className={CardStyle.course.a}>
+              enroll
+            </Link>
           )}
         </div>
       </div>

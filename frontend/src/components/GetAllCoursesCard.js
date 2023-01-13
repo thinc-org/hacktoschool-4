@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import CourseCard from './CourseCard';
 import CardStyle from './CourseCard.module.css';
-import { isStudent, isInstructor } from '../api/AuthAPI';
-import { Link, useNavigate } from 'react-router-dom';
+import { isStudent } from '../api/AuthAPI';
 import {
   getCourseAll,
   getCourseByUsername,
@@ -60,8 +59,6 @@ const GetAllCoursesCard = () => {
                           isEnrolled={false}
                           setEnrolledCourses={setEnrolledCourses}
                           setUnEnrolledCourses={setUnEnrolledCourses}
-                          unEnrolledCourses={unEnrolledCourses}
-                          enrolledCourses={enrolledCourses}
                         />
                       ))}
                     </div>
