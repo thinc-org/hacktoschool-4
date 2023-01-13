@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { isStudent } from '../api/AuthAPI';
 import { joinCourseByTitle } from '../api/CourseAPI';
 import CardStyle from './CourseCard.module.css';
@@ -10,6 +10,7 @@ const CourseCard = ({
   setEnrolledCourses,
   setUnEnrolledCourses,
 }) => {
+  const navigate = useNavigate();
   const handleEnroll = async () => {
     const newCourse = await joinCourseByTitle(course.title);
     setEnrolledCourses((oldCourses) => [...oldCourses, newCourse]);
@@ -21,7 +22,12 @@ const CourseCard = ({
   };
   return (
     //if that course is in that student list there will be no button
-    <div className="course">
+    <div
+      className="course"
+      onClick={() => {
+        navigate(`/courses/${course.title}`);
+      }}
+    >
       <div className={CardStyle.course}>
         <p className={CardStyle.title}>{course.title}</p>
         <br></br>
