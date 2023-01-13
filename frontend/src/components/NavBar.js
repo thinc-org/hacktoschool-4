@@ -21,7 +21,7 @@ const Bar = styled.nav`
   height: 70px;
   box-shadow: inset 0px -1px 0px ${theme.colors.greymedium};
   @media screen and (max-width: 850px) {
-    padding: 1rem 10%;
+    padding: 1rem 5%;
   }
 `;
 
@@ -92,7 +92,7 @@ const SmallHeader = styled.div`
     display: flex;
     align-items: center;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     background: ${(props) => props.theme.colors.greylight};
     width: 100%;
   }
@@ -132,7 +132,7 @@ const Navbar = () => {
             )}
           </Menu>
           <SmallHeader>
-            <div style={{ display: 'flex' }} onClick={toggleNav}>
+            <div style={{ display: 'flex', width: '20%' }} onClick={toggleNav}>
               {isNavVisible ? (
                 <GrClose></GrClose>
               ) : (
@@ -140,7 +140,11 @@ const Navbar = () => {
               )}
             </div>
             <h4>E-learning</h4>
-            <div></div>
+            {isAutheticated() ? (
+              <SignOutMenu username={username} setUsername={setUsername} />
+            ) : (
+              ''
+            )}
           </SmallHeader>
         </Bar>
         {isNavVisible && (
@@ -153,11 +157,7 @@ const Navbar = () => {
                 <NavLink to="/courses">course</NavLink>
               )}
             </NavMenu>
-            {isAutheticated() ? (
-              <SignOutMenu username={username} setUsername={setUsername} />
-            ) : (
-              <SignInMenu />
-            )}
+            {isAutheticated() ? '' : <SignInMenu />}
           </SmallMenu>
         )}
       </ThemeProvider>

@@ -3,12 +3,22 @@ import { NavLink as Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { logoutUser } from '../api/AuthAPI';
 import { COLORS } from './Colors';
+import { GrClose, GrFormDown } from 'react-icons/gr';
 
 const SignMenu = styled.div`
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
   display: flex;
   align-items: center;
   flex-direction: row;
-  gap: 1.5em;
+  justify-content: space-between;
+  max-width: 180px;
+  width: 28%;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  @media screen and (max-width: 850px) {
+    width: 20%;
+    min-width: 13%;
+  }
 `;
 
 const Avatar = styled.div`
@@ -17,7 +27,6 @@ const Avatar = styled.div`
   justify-content: center;
   align-items: center;
   padding: 9px 14px;
-  gap: 14px;
 
   width: 41px;
   height: 40px;
@@ -27,20 +36,69 @@ const Avatar = styled.div`
 `;
 
 const SignoutBtn = styled.button`
-  border-radius: 1rem;
-  padding: 0.5rem 1rem;
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
   cursor: pointer;
   color: ${COLORS.black};
-  font-weight: 900;
   text-decoration: none;
   outline: none;
   border: none;
   background-color: transparent;
+  @media screen and (max-width: 850px) {
+    display: none;
+  }
+`;
+
+const SmallSignoutBtn = styled.button`
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  color: ${COLORS.black};
+  text-decoration: none;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  display: none;
+  @media screen and (max-width: 850px) {
+    display: flex;
+  }
 `;
 
 const AvatarText = styled.p`
   color: ${COLORS.cyandark};
   font-weight: 900;
+`;
+
+const UserInfo = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 35%;
+`;
+
+const SmallLogout = styled.div`
+  display: none;
+  @media screen and (max-width: 850px) {
+    display: flex;
+  }
+`;
+
+const UsernameText = styled.p`
+  color: ${COLORS.greydark};
+  font-weight: 900;
+`;
+
+const SmallMenu = styled.div`
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+  display: none;
+  @media screen and (max-width: 850px) {
+    display: contents;
+    position: absolute;
+    hight: 100px;
+  }
 `;
 
 const SignOutMenu = ({ username, setUsername }) => {
@@ -51,14 +109,30 @@ const SignOutMenu = ({ username, setUsername }) => {
     setUsername('');
     navigate('/');
   };
+
+  const [isNavVisible, setNavVisibility] = useState(false);
+  const toggleNav = () => {
+    setNavVisibility(!isNavVisible);
+  };
+
   return (
     <>
       <SignMenu>
-        <Avatar>
-          <AvatarText>{username[0]}</AvatarText>
-        </Avatar>
-        <p>{username}</p>
-        <SignoutBtn onClick={handleLogout}>Sign Out →</SignoutBtn>
+        <UserInfo>
+          <Avatar>
+            <AvatarText>{username[0]}</AvatarText>
+          </Avatar>
+          <UsernameText>{username}</UsernameText>
+        </UserInfo>
+        <SignoutBtn onClick={handleLogout}>sign out →</SignoutBtn>
+        <SmallLogout onClick={toggleNav}>
+          {isNavVisible ? <GrClose></GrClose> : <GrFormDown></GrFormDown>}
+        </SmallLogout>
+        {isNavVisible && (
+          <SmallMenu>
+            <SmallSignoutBtn onClick={handleLogout}>sign out →</SmallSignoutBtn>
+          </SmallMenu>
+        )}
       </SignMenu>
     </>
   );
