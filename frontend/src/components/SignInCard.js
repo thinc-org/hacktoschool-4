@@ -7,6 +7,7 @@ import './SignInStyle.css';
 const SignInCard = () => {
   const [data, setData] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
@@ -16,7 +17,7 @@ const SignInCard = () => {
     e.preventDefault();
     try {
       await loginUser(data);
-      window.location = '/';
+      navigate('/');
     } catch (error) {
       if (
         error.response &&

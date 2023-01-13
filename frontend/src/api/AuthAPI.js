@@ -33,7 +33,7 @@ export const isAutheticated = () => {
 export const isAdmin = () => {
   if (localStorage.getItem('role')) {
     const localStorageRole = localStorage.getItem('role');
-    if (localStorageRole === ROLE.STUDENT) return true;
+    if (localStorageRole === ROLE.ADMIN) return true;
   }
   return false;
 };
