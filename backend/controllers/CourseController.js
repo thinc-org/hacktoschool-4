@@ -6,7 +6,21 @@ const ctrl = {
   //GET /courses
   getCourses: async (req, res) => {
     try {
-      const courses = await Course.find();
+      const courses = await Course.aggregate([
+        {
+          $lookup: {
+            from: 'users',
+            localField: 'instructor',
+            foreignField: '_id',
+            as: 'instructorName',
+          },
+        },
+        {
+          $set: {
+            instructor: { $arrayElemAt: ['$instructorName.username', 0] },
+          },
+        },
+      ]);
       return res.status(200).json(courses);
     } catch (e) {
       return res.status(400).json({
@@ -30,14 +44,29 @@ const ctrl = {
   //GET /courses/title/:title
   getCourseByTitle: async (req, res) => {
     try {
-      const course = await Course.findOne({ title: req.params.title });
-      if (!course) return res.status(400).json({ error: 'No course found' });
-      const { username } = await User.findById(course.instructor, {
-        username: 1,
-      });
-      //! BAD CODE
-      const courseWithName = { ...course.toJSON(), instructor: username };
-      return res.status(200).json(courseWithName);
+      // const course = await Course.findOne({ title: req.params.title });
+      const course = await Course.aggregate([
+        {
+          $match: {
+            title: req.params.title,
+          },
+        },
+        {
+          $lookup: {
+            from: 'users',
+            localField: 'instructor',
+            foreignField: '_id',
+            as: 'instructor',
+          },
+        },
+        {
+          $set: {
+            instructor: { $arrayElemAt: ['$instructor.username', 0] },
+          },
+        },
+      ]);
+      if (!course[0]) return res.status(400).json({ error: 'No course found' });
+      return res.status(200).json(course[0]);
     } catch (e) {
       return res.status(500).json({
         error: 'Internal Server Error',
