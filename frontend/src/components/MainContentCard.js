@@ -118,7 +118,9 @@ const MainContentCard = () => {
   const copyToClipboard = () => {
     var copyText = 'Hack to school 🎉';
     console.log('hello');
-    navigator.clipboard.writeText(copyText).then(() => {});
+    navigator.clipboard.writeText(copyText).then(() => {
+      console.log('hi');
+    });
   };
 
   return (
@@ -127,7 +129,7 @@ const MainContentCard = () => {
         <Content>
           <Text>
             <h6 style={{ color: '#2B788B' }}>E-COURSE PLATFORM</h6>
-            <ContentHeading onclick={copyToClipboard()}>
+            <ContentHeading onClick={copyToClipboard}>
               <h1>Learning and</h1>
               <h1>teaching online,</h1>
               <h1>made easy.</h1>
