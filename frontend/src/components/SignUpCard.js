@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { registerUser } from '../api/UserAPI';
 import "./SignInStyle.css";
-
+import YtSearch from './YtSearch';
 const SignUpCard = () => {
   const [data, setData] = useState({
     username: '',
@@ -58,6 +58,7 @@ const SignUpCard = () => {
 
           <label>Please select your role:</label>
           <div>
+            {/* <YtSearch></YtSearch> */}
             <input
               type="radio"
               id="student"
