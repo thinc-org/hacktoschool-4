@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { COLORS } from './Colors';
 import styled, { ThemeProvider } from 'styled-components';
 import image from './pictures/contentPicture1.png';
@@ -105,7 +105,11 @@ const ActiveUserText = styled.div`
 
 const MainContentCard = () => {
   const [numberUser, setNumberUser] = useState([]);
-  getNumberUser().then((numberUser) => setNumberUser(numberUser));
+  useEffect(() => {
+    setInterval(() => {
+      getNumberUser().then((numberUser) => setNumberUser(numberUser));
+    }, 5000);
+  }, []);
 
   return (
     <>
