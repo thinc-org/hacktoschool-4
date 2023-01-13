@@ -21,6 +21,8 @@ const CourseDetail = () => {
       <div>{course.description}</div>
       <h2>Instructor</h2>
       <div>{course.instructor}</div>
+      <h2>Announcement</h2>
+      <div>{course.announcement}</div>
     </>
   );
 };

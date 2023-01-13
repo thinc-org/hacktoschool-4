@@ -21,3 +21,10 @@ export const getCourseByTitle = async (title) => {
   const res = await axios.get(url);
   return res.data;
 };
+
+export const addCourseAnnouncement = async (data) => {
+  const url = `${courseURL}announcement/add`;
+  const res = await axios.post(url, data, config);
+  console.log(res.data);
+  return res.data;
+};
