@@ -78,6 +78,7 @@ const ctrl = {
       return res.status(200).send({
         role: user.role,
         accessToken: token,
+        username: user.username,
         message: 'Logged in successfully',
       });
     } catch (e) {
