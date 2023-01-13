@@ -106,6 +106,9 @@ const ActiveUserText = styled.div`
 const MainContentCard = () => {
   const [numberUser, setNumberUser] = useState([]);
   useEffect(() => {
+    getNumberUser().then((numberUser) => setNumberUser(numberUser));
+  });
+  useEffect(() => {
     setInterval(() => {
       getNumberUser().then((numberUser) => setNumberUser(numberUser));
     }, 5000);
