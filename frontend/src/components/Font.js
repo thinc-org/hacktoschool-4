@@ -6,10 +6,15 @@ export const Container = styled.div`
 
   & h1 {
     font-family: 'Dela Gothic One', cursive;
-    font-size: 56px;
-    line-height: 120%;
+    font-size: 40px;
+    line-height: 100%;
     padding: 0px;
-    margin: 0px;
+    margin: 5px;
+    @media screen and (max-width: 850px) {
+      display: flex;
+      justify-content: center;
+      font-size: 30px;
+    }
   }
 
   & h2 {
@@ -21,7 +26,7 @@ export const Container = styled.div`
     @media screen and (max-width: 850px) {
       display: flex;
       justify-content: center;
-      font-size: 30px;
+      font-size: 24px;
     }
   }
 
@@ -69,6 +74,7 @@ export const Container = styled.div`
       font-size: 12px;
       display: flex;
       justify-content: center;
+      text-align: center;
     }
   }
 `;
