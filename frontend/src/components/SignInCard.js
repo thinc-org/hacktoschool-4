@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from '../api/AuthAPI';
-import "./SignInStyle.css";
+import './SignInStyle.css';
 
 const SignInCard = () => {
   const [data, setData] = useState({ username: '', password: '' });
@@ -30,8 +30,6 @@ const SignInCard = () => {
   return (
     <>
       <div>
-
-
         <form onSubmit={handleSubmit}>
           <h3>SIGN IN</h3>
           <label htmlFor="username">username:</label>
@@ -54,7 +52,7 @@ const SignInCard = () => {
             required
           ></input>
           <br></br>
-          <input type="submit" value="Submit" className='form-submit'></input>
+          <input type="submit" value="Submit" className="form-submit"></input>
           {error && <div>{error}</div>}
         </form>
       </div>
