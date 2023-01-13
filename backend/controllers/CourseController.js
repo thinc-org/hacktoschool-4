@@ -79,10 +79,8 @@ const ctrl = {
     const course = new Course(req.body);
     try {
       const newCourse = await course.save();
-      console.log(newCourse);
       return res.status(201).json({ newCourse });
     } catch (e) {
-      console.log(e);
       return res.status(400).json({
         error: 'Cant create new course',
       });
@@ -152,7 +150,6 @@ const ctrl = {
       const authHeader = req.headers['authorization'];
       const token = authHeader && authHeader.split(' ')[1];
       const decoded = jwt_decode(token);
-      console.log(courseInfo);
       //? Is it danger add all courseinfo to database
       const course = new Course({ ...courseInfo, instructor: decoded._id });
       const newCourse = await course.save();
@@ -188,6 +185,7 @@ const ctrl = {
       const token = authHeader && authHeader.split(' ')[1];
       const userID = jwt_decode(token)._id;
       const joinedCourses = User.findById(userID).courses;
+      console.log(existedCourse);
       if (
         (joinedCourses && joinedCourses.includes(courseID)) ||
         existedCourse.students.includes(userID)
@@ -195,11 +193,20 @@ const ctrl = {
         return res.status(409).send({ message: 'User already join course' });
       }
       await User.updateOne({ _id: userID }, { $push: { courses: courseID } });
-      await Course.updateOne(
-        { _id: courseID },
-        { $push: { students: userID } },
+      const course = await Course.findByIdAndUpdate(
+        courseID,
+        {
+          $push: { students: userID },
+        },
+        { lean: true },
       );
-      return res.status(200).send({ message: 'Succesfully joined' });
+      // const course = await Course.updateOne(
+      //   { _id: courseID },
+      //   { $push: { students: userID } },
+      // );
+      return res
+        .status(200)
+        .send({ message: 'Succesfully joined', course: course });
     } catch (e) {
       return res.status(500).send({ message: 'Internal Server Error' });
     }
