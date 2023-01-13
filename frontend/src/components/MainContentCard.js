@@ -4,7 +4,9 @@ import styled, { ThemeProvider } from 'styled-components';
 import image from './pictures/contentPicture1.png';
 import cropedImage from './pictures/contentPicture1croped.png';
 import icon from './pictures/activeIcon.png';
+import starIcon from './pictures/starIcon.png';
 import { getNumberUser } from '../api/UserAPI';
+import { AiTwotoneStar } from 'react-icons/ai';
 
 const theme = {
   colors: COLORS,
@@ -104,6 +106,17 @@ const ActiveUserText = styled.div`
   }
 `;
 
+const PopularCourseText = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  text-align: center;
+  @media screen and (max-width: 850px) {
+    display: flex;
+    justify-content: center;
+  }
+`;
+
 const MainContentCard = () => {
   const [numberUser, setNumberUser] = useState([]);
   useEffect(() => {
@@ -146,13 +159,26 @@ const MainContentCard = () => {
               <h6 style={{ color: '#757575' }}>with the platform.</h6>
             </SmallDetailText>
 
-            <ActiveUserText>
-              <Icon src={icon} />
-              <div>
-                <h3 style={{ margin: '1rem 0px 0.2rem 0px' }}>{numberUser}</h3>
-                <h6>users</h6>
-              </div>
-            </ActiveUserText>
+            <div>
+              <ActiveUserText>
+                <Icon src={icon} />
+                <div>
+                  <h3 style={{ margin: '1rem 0px 0.2rem 0px' }}>
+                    {numberUser}
+                  </h3>
+                  <h6>users</h6>
+                </div>
+              </ActiveUserText>
+              <PopularCourseText>
+                <Icon src={starIcon} />
+                <div>
+                  <h3 style={{ margin: '1rem 0px 0.2rem 0px' }}>
+                    {numberUser}
+                  </h3>
+                  <h6>popular course</h6>
+                </div>
+              </PopularCourseText>
+            </div>
           </Text>
           <Media src={image} />
           <SmallMedia src={cropedImage} />
