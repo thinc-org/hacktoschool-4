@@ -15,7 +15,7 @@ import Dashboard from './pages/Dashboard';
 import DashboardDetail from './pages/DashboardDetail';
 import ReactGA from 'react-ga';
 
-const TRACKING_ID = 'G-ETG88LSRGF'; // OUR_TRACKING_ID
+const TRACKING_ID = 'UA-203754314-2'; // OUR_TRACKING_ID
 ReactGA.initialize(TRACKING_ID);
 
 const theme = {
