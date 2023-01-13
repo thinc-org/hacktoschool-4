@@ -9,12 +9,14 @@ export const loginUser = async (data) => {
   const { data: res } = await axios.post(url, data);
   localStorage.setItem('jwt', res.accessToken);
   localStorage.setItem('role', res.role);
+  localStorage.setItem('username', res.username);
   console.log(res.message);
 };
 
 export const logoutUser = async (data) => {
   localStorage.removeItem('jwt');
   localStorage.removeItem('role');
+  localStorage.removeItem('username');
 };
 
 export const isAutheticated = () => {
@@ -22,7 +24,7 @@ export const isAutheticated = () => {
   //   return false;
   // }
   if (localStorage.getItem('jwt')) {
-    return JSON.parse(localStorage.getItem('jwt'));
+    return localStorage.getItem('jwt');
   } else {
     return false;
   }

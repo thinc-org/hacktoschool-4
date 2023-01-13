@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink as Link } from 'react-router-dom';
 import { COLORS } from './Colors';
 import styled, { ThemeProvider } from 'styled-components';
 import { Container } from './Font';
+import { isAutheticated } from '../api/AuthAPI';
+import SignInMenu from './SignInMenu';
+import SignOutMenu from './SignOutMenu';
 
 const theme = {
   colors: COLORS,
@@ -20,13 +23,6 @@ const NavMenu = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 1.5em;
-`;
-
-const SignMenu = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: row;
   gap: 1.5em;
 `;
 
@@ -53,24 +49,6 @@ const NavLink = styled(Link)`
   }
 `;
 
-const NavBtnLink = styled(Link)`
-  border-radius: 1rem;
-  background: ${(props) => props.theme.colors.cyandark};
-  padding: 0.5rem 1rem;
-  color: ${(props) => props.theme.colors.white};
-  outline: none;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  text-decoration: none;
-  /* Second Nav */
-  &:hover {
-    transition: all 0.2s ease-in-out;
-    background: ${(props) => props.theme.colors.white};
-    color: ${(props) => props.theme.colors.cyandark};
-  }
-`;
-
 const Line = styled.div`
   border-left: 2px solid green;
   border-color: ${(props) => props.theme.colors.greymedium};
@@ -78,6 +56,8 @@ const Line = styled.div`
 `;
 
 const Navbar = () => {
+  const [username, setUsername] = useState(localStorage.getItem('username'));
+
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -91,10 +71,11 @@ const Navbar = () => {
               <NavLink to="/">home</NavLink>
               <NavLink to="/courses">course</NavLink>
             </NavMenu>
-            <SignMenu>
-              <NavLink to="/sign-in">sign in</NavLink>
-              <NavBtnLink to="/sign-up">sign up</NavBtnLink>
-            </SignMenu>
+            {isAutheticated() ? (
+              <SignOutMenu username={username} setUsername={setUsername} />
+            ) : (
+              <SignInMenu />
+            )}
           </Menu>
         </Nav>
       </ThemeProvider>

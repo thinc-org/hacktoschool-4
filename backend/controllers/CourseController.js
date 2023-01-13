@@ -218,6 +218,22 @@ const ctrl = {
       });
     }
   },
+
+  //GET /courses/unenrolled/:username
+  getUnenrolledCourseByUsername: async (req, res) => {
+    try {
+      const user = await User.findOne({ username: req.params.username });
+      if (!user) return res.status(400).json({ error: 'Invalid username' });
+      if (user.role != 'Student')
+        return res.status(401).json({ error: 'Not a Student' });
+      const courses = await Course.find({ _id: { $nin: user.courses } });
+      return res.status(200).json(courses);
+    } catch (e) {
+      return res.status(500).json({
+        error: 'Internal Server Error',
+      });
+    }
+  },
 };
 
 module.exports = ctrl;

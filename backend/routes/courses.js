@@ -230,4 +230,6 @@ routes
 
 routes.route('/create').post(authenticateToken, isAdmin, ctrl.createCourse);
 
+routes.route('/unenrolled/:username').get(ctrl.getUnenrolledCourseByUsername);
+
 module.exports = routes;
