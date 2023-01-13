@@ -14,6 +14,7 @@ const GetAllCoursesCard = () => {
   const [unEnrolledCourses, setUnEnrolledCourses] = useState([]);
   const [enrolledCourses, setEnrolledCourses] = useState([]);
 
+
   useEffect(() => {
     if (isLoggedInStudent) {
       // test with all courses
@@ -44,18 +45,18 @@ const GetAllCoursesCard = () => {
                 {isLoggedInStudent ? (<><div className="courses-header">enrolled</div>
                   <div >{enrolledCourses.map((course) => (
                     <CourseCard course={course} isEnrolled
-                      ={true} />
+                      ={true} setEnrolledCourses={setEnrolledCourses} setUnEnrolledCourses={setUnEnrolledCourses} />
                   ))}
 
                   </div>
                   <hr ></hr>
                   <div className="courses-header">explore</div> <div > {unEnrolledCourses.map((course) => (
                     <CourseCard course={course} isEnrolled
-                      ={false} />
+                      ={false} setEnrolledCourses={setEnrolledCourses} setUnEnrolledCourses={setUnEnrolledCourses} />
                   ))}
                   </div></>) : (<><div className="courses-header">explore</div> <div > {allCourses.map((course) => (
                     <CourseCard course={course} isEnrolled
-                      ={false} />
+                      ={false} setEnrolledCourses={setEnrolledCourses} setUnEnrolledCourses={setUnEnrolledCourses} />
                   ))}
                   </div ></>)}
 
