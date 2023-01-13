@@ -15,4 +15,8 @@ export const getStudentsByCourseTitle = async (title) => {
   return data.data;
 };
 
-
+export const getNumberUser = async () => {
+  const url = `${basedURL}users`;
+  const res = await axios.get(url);
+  return res.data.length;
+};

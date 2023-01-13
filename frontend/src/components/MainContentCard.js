@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { COLORS } from './Colors';
 import styled, { ThemeProvider } from 'styled-components';
 import image from './pictures/contentPicture1.png';
 import cropedImage from './pictures/contentPicture1croped.png';
 import icon from './pictures/activeIcon.png';
+import { getNumberUser } from '../api/UserAPI';
 
 const theme = {
   colors: COLORS,
@@ -103,6 +104,9 @@ const ActiveUserText = styled.div`
 `;
 
 const MainContentCard = () => {
+  const [numberUser, setNumberUser] = useState([]);
+  getNumberUser().then((numberUser) => setNumberUser(numberUser));
+
   return (
     <>
       <Card>
@@ -129,7 +133,7 @@ const MainContentCard = () => {
             <ActiveUserText>
               <Icon src={icon} />
               <div>
-                <h3 style={{ margin: '1rem 0px 0.2rem 0px' }}>600</h3>
+                <h3 style={{ margin: '1rem 0px 0.2rem 0px' }}>{numberUser}</h3>
                 <h6>users</h6>
               </div>
             </ActiveUserText>
