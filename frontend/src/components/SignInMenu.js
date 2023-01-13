@@ -12,6 +12,7 @@ const SignMenu = styled.div`
   @media screen and (max-width: 850px) {
     display: flex;
     flex-direction: column;
+    gap: 1.5rem;
   }
 `;
 

@@ -10,14 +10,14 @@ const SignMenu = styled.div`
   display: flex;
   align-items: center;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: end;
+  gap: 1rem;
   max-width: 180px;
-  width: 28%;
+  min-width: 30%;
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   @media screen and (max-width: 850px) {
     width: 20%;
-    min-width: 13%;
   }
 `;
 
@@ -28,11 +28,16 @@ const Avatar = styled.div`
   align-items: center;
   padding: 9px 14px;
 
-  width: 41px;
+  width: 40px;
   height: 40px;
 
   background: ${COLORS.cyanlight};
   border-radius: 100px;
+
+  @media screen and (max-width: 850px) {
+    width: 30px;
+    height: 30px;
+  }
 `;
 
 const SignoutBtn = styled.button`
@@ -75,7 +80,8 @@ const UserInfo = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: end;
+  gap: 0.5rem;
   width: 35%;
 `;
 

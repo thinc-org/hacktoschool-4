@@ -18,7 +18,8 @@ const Bar = styled.nav`
   background: ${(props) => props.theme.colors.greylight};
   top: 0; /* Stick it to the top */
   padding: 1rem 20%;
-  height: 70px;
+
+  align-items: center;
   box-shadow: inset 0px -1px 0px ${theme.colors.greymedium};
   @media screen and (max-width: 850px) {
     padding: 1rem 5%;
@@ -34,6 +35,7 @@ const NavMenu = styled.div`
   max-width: 350px;
   @media screen and (max-width: 850px) {
     display: flex;
+    gap: 1.5rem;
     flex-direction: column;
   }
 `;
@@ -72,6 +74,7 @@ const SmallMenu = styled.div`
   display: none;
   @media screen and (max-width: 850px) {
     display: flex;
+    align-items: center;
     position: absolute;
     font-family: 'Montserrat', sans-serif;
     font-size: 16px;
@@ -132,7 +135,7 @@ const Navbar = () => {
             )}
           </Menu>
           <SmallHeader>
-            <div style={{ display: 'flex', width: '20%' }} onClick={toggleNav}>
+            <div style={{ display: 'flex', width: '30%' }} onClick={toggleNav}>
               {isNavVisible ? (
                 <GrClose></GrClose>
               ) : (
@@ -143,7 +146,7 @@ const Navbar = () => {
             {isAutheticated() ? (
               <SignOutMenu username={username} setUsername={setUsername} />
             ) : (
-              ''
+              <div style={{ width: '20%' }}></div>
             )}
           </SmallHeader>
         </Bar>
