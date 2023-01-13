@@ -44,7 +44,7 @@ export const getUnenrolledCourseByUsername = async (username) => {
 }
 
 export const joinCourseByTitle = async (title) => {
-    const url = `${basedURL}joinCourse/${title}`;
+    const url = `${courseURL}joinCourse/${title}`;
     const res = await axios.post(url, { title: title }, config);
     console.log(res.data);
 }

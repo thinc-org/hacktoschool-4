@@ -6,11 +6,13 @@ import CardStyle from "./CourseCard.module.css";
 
 
 
-const CourseCard = ({ course, isEnrolled }) => {
+const CourseCard = ({ course, isEnrolled, setEnrolledCourses, setUnEnrolledCourses }) => {
     const handleEnroll = async () => {
 
-        joinCourseByTitle(course.title);
 
+        await joinCourseByTitle(course.title);
+        setEnrolledCourses(oldCourses => [...oldCourses, { title: course.title }]);
+        setUnEnrolledCourses(oldCourses => oldCourses.filter(function (value, index, arr) { return value.title != course.title }));
 
 
     }
@@ -27,7 +29,7 @@ const CourseCard = ({ course, isEnrolled }) => {
                 <div style={{ marginTop: '60px', marginBottom: '60px' }}></div>
                 <div>
                     {
-                        (isEnrolled) ? <div></div> : ((isStudent) ? <a onClick={handleEnroll} className={CardStyle.course.a}>enroll</a> : <a href="../sign-in" className={CardStyle.course.a}>enroll</a>)
+                        (isEnrolled) ? <div></div> : ((isStudent() ? <a onClick={handleEnroll} className={CardStyle.course.a}>enroll</a> : <a href="../sign-in" className={CardStyle.course.a}>enkkk</a>))
                     }
                 </div>
 
