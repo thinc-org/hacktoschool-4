@@ -4,7 +4,7 @@ import CourseCard from '../components/CourseCard';
 
 import CardStyle from '../components/CourseCard.module.css';
 
-
+import { isStudent } from '../api/AuthAPI';
 import axios from 'axios';
 
 import GetAllCoursesCard from '../components/GetAllCoursesCard';

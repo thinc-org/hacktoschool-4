@@ -1,52 +1,53 @@
 import React, { useEffect, useState } from 'react';
 import CourseCard from './CourseCard';
 import CardStyle from './CourseCard.module.css';
-
+import { isStudent, isInstructor } from '../api/AuthAPI';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import { getCourseAll } from '../api/CourseAPI';
+import { getCourseAll, getCourseByUsername, getUnenrolledCourseByUsername } from '../api/CourseAPI';
 
-const GetAllCoursesCard = (isLoggedIn) => {
+const GetAllCoursesCard = () => {
+  const isLoggedInStudent = isStudent();
+  const isLoggenInInstr = isInstructor();
   const [allCourses, setAllCourses] = useState([]);
 
   const [unEnrolledCourses, setUnEnrolledCourses] = useState([]);
   const [enrolledCourses, setEnrolledCourses] = useState([]);
 
 
-  const allCoursesEle = <><div className="courses-header">explore</div> <div> {allCourses.map((course) => (
-    <CourseCard course={course} isEnrolled
-      ={false} />
-  ))}
-  </div >
-  </>
+  // const allCoursesEle = <><div className="courses-header">explore</div> <div> {allCourses.map((course) => (
+  //   <CourseCard course={course} isEnrolled
+  //     ={false} />
+  // ))}
+  // </div >
+  // </>
 
 
 
-  const loggedInCoursesEle = <>
-    <div className="courses-header">enrolled</div>
-    <div>{allCourses.map((course) => (
-      <CourseCard course={course} isEnrolled
-        ={false} />
-    ))};
+  // const loggedInCoursesEle = <>
+  //   <div className="courses-header">enrolled</div>
+  //   <div>{enrolledCourses.map((course) => (
+  //     <CourseCard course={course} isEnrolled
+  //       ={false} />
+  //   ))}
 
-    </div>
-    <div className="courses-header">explore</div> <div> {unEnrolledCourses.map((course) => (
-      <CourseCard course={course} isEnrolled
-        ={false} />
-    ))};
-    </div>
+  //   </div>
+  //   <div className="courses-header">explore</div> <div> {unEnrolledCourses.map((course) => (
+  //     <CourseCard course={course} isEnrolled
+  //       ={false} />
+  //   ))}
+  //   </div>
 
-  </>
-  const coursesEle = (isLoggedIn) ? loggedInCoursesEle : allCoursesEle;
+  // </>
 
 
   useEffect(() => {
 
 
-    if (isLoggedIn) {
+    if (isLoggedInStudent) {
       // test with all courses
-      getCourseAll().then((courses) => setUnEnrolledCourses(courses));
-      getCourseAll().then((courses) => setEnrolledCourses(courses));
+      getUnenrolledCourseByUsername(localStorage.getItem("username")).then((courses) => setUnEnrolledCourses(courses));
+      getCourseByUsername(localStorage.getItem("username")).then((courses) => setEnrolledCourses(courses));
       console.log("logged in")
     } else {
       getCourseAll().then((courses) => setAllCourses(courses));
@@ -73,7 +74,28 @@ const GetAllCoursesCard = (isLoggedIn) => {
               style={{ width: '100%', marginRight: '30px' }}
             >
               <div>
-                {coursesEle}
+                {isLoggedInStudent ? (<><div className="courses-header">enrolled</div>
+                  <div>{enrolledCourses.map((course) => (
+                    <CourseCard course={course} isEnrolled
+                      ={false} />
+                  ))}
+
+                  </div>
+                  <div className="courses-header">explore</div> <div> {unEnrolledCourses.map((course) => (
+                    <CourseCard course={course} isEnrolled
+                      ={false} />
+                  ))}
+                  </div></>) : (<><div className="courses-header">explore</div> <div> {allCourses.map((course) => (
+                    <CourseCard course={course} isEnrolled
+                      ={false} />
+                  ))}
+                  </div ></>)}
+
+
+
+
+                {/* <CoursesEle></CoursesEle> */}
+
 
 
 
