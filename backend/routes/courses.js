@@ -193,7 +193,9 @@ routes.route('/username/:username').get(ctrl.getCourseByUsername);
  *      '500':
  *        description: Internal Server Error
  */
-routes.route('/unenrolled/:username').get(ctrl.getUnenrolledCourseByUsername);
+routes
+  .route('/unenrolled/:username')
+  .get(authenticateToken, isStudent, ctrl.getUnenrolledCourseByUsername);
 
 /**
  * @swagger
