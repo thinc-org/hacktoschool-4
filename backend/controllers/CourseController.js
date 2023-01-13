@@ -234,6 +234,26 @@ const ctrl = {
       });
     }
   },
+
+  //POST /courses/announcement/add
+  addAnnouncement: async (req, res) => {
+    try {
+      const data = req.body; // title, announcement;
+      if (!data.title)
+        return res.status(400).json({ message: 'Invalid Course title' });
+      if (!data.announcement)
+        return res.status(400).json({ message: 'No announcement' });
+      await Course.findOneAndUpdate(
+        { title: data.title },
+        { announcement: data.announcement },
+      );
+      return res.status(201).json({ message: 'Successfully added' });
+    } catch (e) {
+      return res.status(500).json({
+        error: 'Internal Server Error',
+      });
+    }
+  },
 };
 
 module.exports = ctrl;
