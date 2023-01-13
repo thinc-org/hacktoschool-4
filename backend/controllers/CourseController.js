@@ -32,7 +32,12 @@ const ctrl = {
     try {
       const course = await Course.findOne({ title: req.params.title });
       if (!course) return res.status(400).json({ error: 'No course found' });
-      return res.status(200).json(course);
+      const { username } = await User.findById(course.instructor, {
+        username: 1,
+      });
+      //! BAD CODE
+      const courseWithName = { ...course.toJSON(), instructor: username };
+      return res.status(200).json(courseWithName);
     } catch (e) {
       return res.status(500).json({
         error: 'Internal Server Error',
