@@ -4,6 +4,7 @@ import { COLORS } from './Colors';
 import styled, { ThemeProvider } from 'styled-components';
 import thincLogo from './pictures/thincLogo.png';
 import cleverseLogo from './pictures/cleverseLogo.png';
+import { isAutheticated, isInstructor } from '../api/AuthAPI';
 
 const theme = {
   colors: COLORS,
@@ -12,8 +13,9 @@ const theme = {
 const Bar = styled.nav`
   background: ${(props) => props.theme.colors.greylight};
   top: 0; /* Stick it to the top */
-  padding: 1rem 20%;
-  height: 140px;
+  padding: 2rem 20%;
+  display: flex;
+  width: 100%;
   box-shadow: inset 0px -1px 0px ${theme.colors.greymedium};
 `;
 
@@ -22,6 +24,10 @@ const NavMenu = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 1.5em;
+  @media screen and (max-width: 850px) {
+    justify-content: space-around;
+    width: 100%;
+  }
 `;
 
 const Menu = styled.div`
@@ -30,9 +36,6 @@ const Menu = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  @media screen and (max-width: 850px) {
-    display: none;
-  }
   font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   margin-bottom: 0.5rem;
@@ -58,6 +61,31 @@ const Logo = styled.img`
 const ContentBlock = styled.div`
   justify-content: center;
   gap: 1.5em;
+  width: 100%;
+`;
+
+const LogoBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.5em;
+
+  @media screen and (max-width: 850px) {
+    display: none;
+  }
+`;
+
+const SmallLogoBox = styled.div`
+  display: none;
+
+  @media screen and (max-width: 850px) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5em;
+    justify-content: center;
+    padding: 1rem;
+  }
 `;
 
 const BottomText = styled.div`
@@ -70,6 +98,7 @@ const BottomText = styled.div`
   justify-content: center;
   margin-top: 0.5rem;
   color: #757575;
+  text-align: center;
 `;
 
 const Footer = () => {
@@ -81,14 +110,22 @@ const Footer = () => {
             <Menu>
               <NavMenu>
                 <NavLink to="/">home</NavLink>
-                <NavLink to="/courses">course</NavLink>
+                {isAutheticated() && isInstructor() ? (
+                  <NavLink to="/dashboard">dashboard</NavLink>
+                ) : (
+                  <NavLink to="/courses">course</NavLink>
+                )}
               </NavMenu>
-              <NavMenu>
+              <LogoBox>
                 <Logo src={thincLogo}></Logo>
                 <Logo src={cleverseLogo}></Logo>
-              </NavMenu>
+              </LogoBox>
             </Menu>
             <Line></Line>
+            <SmallLogoBox>
+              <Logo src={thincLogo}></Logo>
+              <Logo src={cleverseLogo}></Logo>
+            </SmallLogoBox>
             <BottomText>
               ©2021 Thinc. x Cleverse. Project for hack to school
             </BottomText>
