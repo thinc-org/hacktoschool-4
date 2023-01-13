@@ -42,6 +42,10 @@ export const Container = styled.div`
     line-height: 100%;
     padding: 0px;
     margin: 0px;
+    @media screen and (max-width: 850px) {
+      font-size: 18px;
+      text-align: center;
+    }
   }
   & h5 {
     font-family: 'Montserrat', sans-serif;

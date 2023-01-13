@@ -8,9 +8,9 @@ const Home = () => {
   return (
     <div>
       <MainContentCard></MainContentCard>
-      <ContentCardLight1></ContentCardLight1>
+      {/* <ContentCardLight1></ContentCardLight1>
       <ContentCardDark></ContentCardDark>
-      <ContentCardLight2></ContentCardLight2>
+      <ContentCardLight2></ContentCardLight2> */}
     </div>
   );
 };
