@@ -10,6 +10,7 @@ import SignUpPage from './pages/SignUpPage';
 import InstructorRoute from './routes/InstructorRoutes';
 import CoursesPage from './pages/CoursesPage';
 import CreateCourse from './pages/CreateCourse';
+import CourseDetail from './pages/CourseDetail';
 
 const theme = {
   colors: COLORS,
@@ -24,14 +25,17 @@ function App() {
           <Routes>
             <Route path="/" exact element={<Home />} />
             <Route path="/courses" exact element={<CoursesPage />} />
-            <Route
-              path="/courses"
-              exact
-              element={<InstructorRoute Component={CoursesPage} to="/test" />}
-            />
+
             <Route path="/sign-in" element={<SignInPage />} />
             <Route path="/sign-up" element={<SignUpPage />} />
-            <Route path="/create/course" element={<CreateCourse />} />
+            <Route
+              path="/courses/create"
+              exact
+              element={
+                <InstructorRoute Component={CreateCourse} to="/courses" />
+              }
+            />
+            <Route path="courses/:title" element={<CourseDetail />} />
           </Routes>
           <Footer></Footer>
         </Container>

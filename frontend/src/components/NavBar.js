@@ -84,7 +84,9 @@ const Navbar = () => {
         <Nav>
           <Menu>
             <NavMenu>
-              <h4>E-learning</h4>
+              <NavLink to="/">
+                <h4>E-learning</h4>
+              </NavLink>
               <Line></Line>
               <NavLink to="/">home</NavLink>
               <NavLink to="/courses">course</NavLink>

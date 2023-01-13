@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { registerUser } from '../api/UserAPI';
+import { addCourse } from '../api/CourseAPI';
 
 const CreateCourseForm = () => {
   const [data, setData] = useState({
@@ -18,7 +18,7 @@ const CreateCourseForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // TODO: CREATE COURSE API NOT FINISHED
+      await addCourse(data.title);
       navigate('/dashboard');
     } catch (error) {
       if (
