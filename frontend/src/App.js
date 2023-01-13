@@ -13,6 +13,10 @@ import CreateCourse from './pages/CreateCourse';
 import CourseDetail from './pages/CourseDetail';
 import Dashboard from './pages/Dashboard';
 import DashboardDetail from './pages/DashboardDetail';
+import ReactGA from 'react-ga';
+
+const TRACKING_ID = 'G-ETG88LSRGF'; // OUR_TRACKING_ID
+ReactGA.initialize(TRACKING_ID);
 
 const theme = {
   colors: COLORS,

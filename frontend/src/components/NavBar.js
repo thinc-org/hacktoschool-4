@@ -8,6 +8,7 @@ import SignInMenu from './SignInMenu';
 import SignOutMenu from './SignOutMenu';
 import { TbAlignJustified } from 'react-icons/tb';
 import { GrClose } from 'react-icons/gr';
+import useAnalyticsEventTracker from '../util/useAnalyticsEventTracker';
 
 const theme = {
   colors: COLORS,
@@ -100,7 +101,7 @@ const SmallHeader = styled.div`
 const Navbar = () => {
   const [username, setUsername] = useState(localStorage.getItem('username'));
   const [isNavVisible, setNavVisibility] = useState(false);
-
+  const gaEventTracker = useAnalyticsEventTracker('home');
   const toggleNav = () => {
     setNavVisibility(!isNavVisible);
   };
@@ -115,7 +116,9 @@ const Navbar = () => {
                 <h4>E-learning</h4>
               </NavLink>
               <Line></Line>
-              <NavLink to="/">home</NavLink>
+              <NavLink to="/" onClick={() => gaEventTracker('home')}>
+                home
+              </NavLink>
               {isAutheticated() && isInstructor() ? (
                 <NavLink to="/dashboard">dashboard</NavLink>
               ) : (
