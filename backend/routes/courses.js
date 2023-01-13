@@ -172,6 +172,31 @@ routes.route('/username/:username').get(ctrl.getCourseByUsername);
 
 /**
  * @swagger
+ * /courses/unenrolled/{username}:
+ *  get:
+ *    tags:
+ *      - courses
+ *    summary: Find all unenrolled courses by student username
+ *    description: Find all unenrolled courses by student username
+ *    parameters:
+ *      - name: username
+ *        in: path
+ *        description: just username :P
+ *        required: true
+ *        schema:
+ *          type: array of string
+ *    responses:
+ *      '200':
+ *        description: successful operation
+ *      '400':
+ *        description: Invalid Username
+ *      '500':
+ *        description: Internal Server Error
+ */
+routes.route('/unenrolled/:username').get(ctrl.getUnenrolledCourseByUsername);
+
+/**
+ * @swagger
  * /courses/addCourse:
  *   post:
  *     tags:
@@ -228,8 +253,41 @@ routes
   .route('/joinCourse/:title')
   .post(authenticateToken, isStudent, ctrl.joinCourse);
 
-routes.route('/create').post(authenticateToken, isAdmin, ctrl.createCourse);
+/**
+ * @swagger
+ * /courses/announcement/add:
+ *   post:
+ *     tags:
+ *       - courses
+ *     summary: Add a new course announcement to database
+ *     description: Instructor add a new course announcement to database
+ *     parameters:
+ *       - name: title
+ *         in: body
+ *         description: title of a courses
+ *         required: true
+ *         schema:
+ *           type: string
+ *       - name: announcement
+ *         in: body
+ *         description: announcement text
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '201':
+ *         description: Course created successfully
+ *       '400':
+ *         description: No course title
+ *       '409':
+ *         description: Course title is already taken
+ *       '500':
+ *         description: Internal Server Error
+ */
+routes
+  .route('/announcement/add')
+  .post(authenticateToken, isInstructor, ctrl.addAnnouncement);
 
-routes.route('/unenrolled/:username').get(ctrl.getUnenrolledCourseByUsername);
+routes.route('/create').post(authenticateToken, isAdmin, ctrl.createCourse);
 
 module.exports = routes;
