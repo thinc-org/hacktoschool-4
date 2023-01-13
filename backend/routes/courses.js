@@ -228,7 +228,7 @@ routes
 
 /**
  * @swagger
- * /joinCourse/{title}:
+ * /courses/joinCourse/{title}:
  *   post:
  *     tags:
  *       - courses
