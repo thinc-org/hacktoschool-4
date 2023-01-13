@@ -290,6 +290,8 @@ routes
   .route('/announcement/add')
   .post(authenticateToken, isInstructor, ctrl.addAnnouncement);
 
+routes.route('/popularCourse').get(ctrl.getPopularCourse);
+
 routes.route('/create').post(authenticateToken, isAdmin, ctrl.createCourse);
 
 module.exports = routes;

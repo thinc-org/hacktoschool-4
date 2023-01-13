@@ -294,6 +294,26 @@ const ctrl = {
       });
     }
   },
+
+  //GET /courses/popularCourse
+  getPopularCourse: async (req, res) => {
+    const popularCourse = await Course.aggregate([
+      {
+        $project: {
+          title: 1,
+          studentSize: { $size: '$students' },
+        },
+      },
+      {
+        $sort: { studentSize: -1 },
+      },
+      {
+        $limit: 1,
+      },
+    ]);
+    console.log(popularCourse[0].title);
+    return res.status(201).json({ popularCourse: popularCourse[0].title });
+  },
 };
 
 module.exports = ctrl;
