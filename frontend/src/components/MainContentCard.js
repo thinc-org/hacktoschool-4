@@ -6,6 +6,7 @@ import cropedImage from './pictures/contentPicture1croped.png';
 import icon from './pictures/activeIcon.png';
 import starIcon from './pictures/starIcon.png';
 import { getNumberUser } from '../api/UserAPI';
+import { getPopularCourse } from '../api/CourseAPI';
 import { AiTwotoneStar } from 'react-icons/ai';
 
 const theme = {
@@ -119,9 +120,13 @@ const PopularCourseText = styled.div`
 
 const MainContentCard = () => {
   const [numberUser, setNumberUser] = useState([]);
+  const [popularCourse, setPopularCourse] = useState('');
   useEffect(() => {
     getNumberUser().then((numberUser) => setNumberUser(numberUser));
-  });
+    getPopularCourse().then((popularCourse) => setPopularCourse(popularCourse));
+
+    console.log('check', popularCourse);
+  }, []);
   useEffect(() => {
     setInterval(() => {
       getNumberUser().then((numberUser) => setNumberUser(numberUser));
@@ -173,7 +178,7 @@ const MainContentCard = () => {
                 <Icon src={starIcon} />
                 <div>
                   <h3 style={{ margin: '1rem 0px 0.2rem 0px' }}>
-                    {numberUser}
+                    {popularCourse}
                   </h3>
                   <h6>popular course</h6>
                 </div>

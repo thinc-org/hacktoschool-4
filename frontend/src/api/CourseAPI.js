@@ -6,46 +6,52 @@ const basedURL = 'http://localhost:8080/api/'; // in dev ==> http://localhost:80
 const courseURL = `${basedURL}courses/`;
 
 export const getCourseAll = async () => {
-    const url = courseURL;
-    const res = await axios.get(url);
-    return res.data;
+  const url = courseURL;
+  const res = await axios.get(url);
+  return res.data;
 };
 
 export const addCourse = async (title) => {
-    const url = `${courseURL}addCourse`;
-    const res = await axios.post(url, { title: title }, config);
-    return res.data;
+  const url = `${courseURL}addCourse`;
+  const res = await axios.post(url, { title: title }, config);
+  return res.data;
 };
 
 export const getCourseByTitle = async (title) => {
-    const url = `${courseURL}title/${title}`;
-    const res = await axios.get(url);
-    return res.data;
+  const url = `${courseURL}title/${title}`;
+  const res = await axios.get(url);
+  return res.data;
 };
 
 export const addCourseAnnouncement = async (data) => {
-    const url = `${courseURL}announcement/add`;
-    const res = await axios.post(url, data, config);
-    console.log(res.data);
-    return res.data;
+  const url = `${courseURL}announcement/add`;
+  const res = await axios.post(url, data, config);
+  console.log(res.data);
+  return res.data;
 };
 
 //GET /courses/username/:username
 export const getCourseByUsername = async (username) => {
-
-    const url = `${courseURL}username/${username}`;
-    const res = await axios.get(url);
-    console.log(res.data);
-    return res.data;
-}
+  const url = `${courseURL}username/${username}`;
+  const res = await axios.get(url);
+  console.log(res.data);
+  return res.data;
+};
 export const getUnenrolledCourseByUsername = async (username) => {
-    const url = `${courseURL}unenrolled/${username}`;
-    const res = await axios.get(url, config);
-    return res.data;
+  const url = `${courseURL}unenrolled/${username}`;
+  const res = await axios.get(url, config);
+  return res.data;
 };
 
 export const joinCourseByTitle = async (title) => {
-    const url = `${courseURL}joinCourse/${title}`;
-    const res = await axios.post(url, { title: title }, config);
-    return res.data.course;
+  const url = `${courseURL}joinCourse/${title}`;
+  const res = await axios.post(url, { title: title }, config);
+  return res.data.course;
+};
+
+export const getPopularCourse = async () => {
+  const url = `${courseURL}popularCourse`;
+  const res = await axios.get(url);
+  console.log(res.data.popularCourse);
+  return res.data.popularCourse;
 };
