@@ -24,14 +24,16 @@ function App() {
           <Routes>
             <Route path="/" exact element={<Home />} />
             <Route path="/courses" exact element={<CoursesPage />} />
-            <Route
-              path="/courses"
-              exact
-              element={<InstructorRoute Component={CoursesPage} to="/test" />}
-            />
+
             <Route path="/sign-in" element={<SignInPage />} />
             <Route path="/sign-up" element={<SignUpPage />} />
-            <Route path="/create/course" element={<CreateCourse />} />
+            <Route
+              path="/courses/create"
+              exact
+              element={
+                <InstructorRoute Component={CreateCourse} to="/courses" />
+              }
+            />
           </Routes>
           <Footer></Footer>
         </Container>
