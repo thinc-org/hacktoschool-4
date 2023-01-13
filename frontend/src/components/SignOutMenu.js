@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink as Link } from 'react-router-dom';
+import { NavLink as Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { logoutUser } from '../api/AuthAPI';
 import { COLORS } from './Colors';
@@ -44,10 +44,12 @@ const AvatarText = styled.p`
 `;
 
 const SignOutMenu = ({ username, setUsername }) => {
+  const navigate = useNavigate();
   console.log('re');
   const handleLogout = () => {
     logoutUser();
     setUsername('');
+    navigate('/');
   };
   return (
     <>

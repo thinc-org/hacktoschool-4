@@ -3,7 +3,7 @@ import { NavLink as Link } from 'react-router-dom';
 import { COLORS } from './Colors';
 import styled, { ThemeProvider } from 'styled-components';
 import { Container } from './Font';
-import { isAutheticated } from '../api/AuthAPI';
+import { isAutheticated, isInstructor } from '../api/AuthAPI';
 import SignInMenu from './SignInMenu';
 import SignOutMenu from './SignOutMenu';
 
@@ -69,7 +69,11 @@ const Navbar = () => {
               </NavLink>
               <Line></Line>
               <NavLink to="/">home</NavLink>
-              <NavLink to="/courses">course</NavLink>
+              {isAutheticated() && isInstructor() ? (
+                <NavLink to="/dashboard">dashboard</NavLink>
+              ) : (
+                <NavLink to="/courses">course</NavLink>
+              )}
             </NavMenu>
             {isAutheticated() ? (
               <SignOutMenu username={username} setUsername={setUsername} />
