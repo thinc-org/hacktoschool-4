@@ -104,17 +104,7 @@ const ActiveUserText = styled.div`
   @media screen and (max-width: 850px) {
     display: flex;
     justify-content: center;
-  }
-`;
-
-const PopularCourseText = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  text-align: center;
-  @media screen and (max-width: 850px) {
-    display: flex;
-    justify-content: center;
+    text-align: center;
   }
 `;
 
@@ -166,6 +156,15 @@ const MainContentCard = () => {
 
             <div>
               <ActiveUserText>
+                <Icon src={starIcon} />
+                <div>
+                  <h3 style={{ margin: '1rem 0px 0.2rem 0px' }}>
+                    {popularCourse}
+                  </h3>
+                  <h6>popular course</h6>
+                </div>
+              </ActiveUserText>
+              <ActiveUserText>
                 <Icon src={icon} />
                 <div>
                   <h3 style={{ margin: '1rem 0px 0.2rem 0px' }}>
@@ -174,15 +173,6 @@ const MainContentCard = () => {
                   <h6>users</h6>
                 </div>
               </ActiveUserText>
-              <PopularCourseText>
-                <Icon src={starIcon} />
-                <div>
-                  <h3 style={{ margin: '1rem 0px 0.2rem 0px' }}>
-                    {popularCourse}
-                  </h3>
-                  <h6>popular course</h6>
-                </div>
-              </PopularCourseText>
             </div>
           </Text>
           <Media src={image} />
